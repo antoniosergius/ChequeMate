@@ -1,0 +1,7 @@
+/dist/
+.build.xml
+/build/
+.config.xml
+.icon.ico
+.manifest.mf
+

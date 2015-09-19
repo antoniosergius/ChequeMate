@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ChequesDataEntradaCliente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="549" leftMargin="23" rightMargin="23" topMargin="23" bottomMargin="23" uuid="1c34969a-6ece-4c8e-a1e8-39cb98c06fec">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="191"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Row" mode="Transparent" fill="Solid">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#D8D8D8"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="CodigoCliente" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[30]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DataEntrada" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT nome, dataEntrada, dataBoa, valor, valorLiquido, cheque.cadastro, emitente, banco, agencia, numero
+from cheque,cliente
+WHERE idCliente = $P{CodigoCliente}
+AND fkCliente = idCliente AND DATE(dataEntrada) = $P{DataEntrada}
+order by 3]]>
+	</queryString>
+	<field name="nome" class="java.lang.String"/>
+	<field name="dataEntrada" class="java.sql.Timestamp"/>
+	<field name="dataBoa" class="java.sql.Timestamp"/>
+	<field name="valor" class="java.math.BigDecimal"/>
+	<field name="valorLiquido" class="java.math.BigDecimal"/>
+	<field name="cadastro" class="java.lang.String"/>
+	<field name="emitente" class="java.lang.String"/>
+	<field name="banco" class="java.lang.Integer"/>
+	<field name="agencia" class="java.lang.Integer"/>
+	<field name="numero" class="java.lang.Integer"/>
+	<variable name="totalBruto" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+	</variable>
+	<variable name="totalLiquido" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorLiquido}]]></variableExpression>
+	</variable>
+	<variable name="numRegistros" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{numero}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="68">
+			<textField pattern="EEEEE, dd MMMMM yyyy - HH:mm">
+				<reportElement uuid="dfe2e337-80cb-4f51-bac8-5d079068aac1" x="288" y="0" width="261" height="28"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="db433c04-d674-43e6-b5b4-da2f7c63b514" x="0" y="0" width="131" height="28"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe Script" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ChequeMate]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="43abca2d-504f-4473-a078-06d98a24a708" x="0" y="28" width="294" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cliente: "+$P{CodigoCliente}+" - "+$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="609d7153-0d57-424b-abe4-b6db2f680951" x="0" y="44" width="312" height="14"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cheques Cadastrados na "+ new SimpleDateFormat("EEEEEEEEE, dd/MM/yyyy").format($P{DataEntrada}.getTime())]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d5f7ade2-1cfc-445b-8ddb-cb5fffc56997" x="457" y="28" width="80" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="9dc25e53-4499-494b-9818-fd8d4eb4d8da" x="537" y="28" width="12" height="30"/>
+				<textElement>
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5bf786a9-51bf-428c-971a-198eb5201e74" x="0" y="0" width="39" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Número]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ac5d4186-4b4f-4261-b234-2944297a215f" x="42" y="0" width="30" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Banco]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="31181a80-8e1d-417e-9a06-77a0a14308a2" x="131" y="0" width="34" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Bruto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="aa4bb8e2-706b-40fb-ab74-4dbf1c26029a" x="183" y="0" width="37" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Líquido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a9f46345-9e7b-4e94-bd92-7105465773ba" x="294" y="0" width="81" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Emitente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6655b5a2-d242-4e0b-b0b9-3e35d59d5935" x="469" y="0" width="52" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Cadastro]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="0500c072-f114-43ab-85af-113ea8f65787" x="0" y="15" width="549" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="05de5499-a429-4bd7-b9c7-2fdd3f1ed890" x="230" y="0" width="54" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Vencimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e0b8d947-639e-4f06-8178-133936b70e57" x="72" y="0" width="40" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ Agência]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<frame>
+				<reportElement uuid="3595b3eb-da90-4dfa-80a9-b7e093660d10" style="Row" mode="Opaque" x="0" y="0" width="549" height="13"/>
+				<textField pattern="000000">
+					<reportElement uuid="8f12e473-fcc4-415b-bade-446a6b01dd3d" x="0" y="0" width="39" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+				</textField>
+				<textField pattern="000">
+					<reportElement uuid="526eab81-60ce-4780-bfab-14c05f788bb3" x="42" y="0" width="30" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{banco}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="7954cbe9-3c64-4c6d-aea0-6fc8b1f6c336" x="469" y="0" width="80" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cadastro}.length() == 14 ?
+    new StringBuilder().append($F{cadastro}.substring(0, 2))
+     .append(".").append($F{cadastro}.substring(2, 5))
+     .append(".").append($F{cadastro}.substring(5, 8))
+     .append("/").append($F{cadastro}.substring(8, 12))
+     .append("-").append($F{cadastro}.substring(12, 14))
+     .toString() :
+    new StringBuilder().append($F{cadastro}.substring(0, 3))
+     .append(".").append($F{cadastro}.substring(3, 6))
+     .append(".").append($F{cadastro}.substring(6, 9))
+     .append("-").append($F{cadastro}.substring(9, 11))
+     .toString()]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="4e08d18e-f2c1-4132-83ca-c465666b37ea" x="294" y="0" width="163" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{emitente}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yy">
+					<reportElement uuid="7342325a-fe68-433b-9004-098f4cbdd0d7" x="230" y="0" width="54" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dataBoa}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement uuid="9a195a85-f415-4113-af61-754cac3574fb" x="169" y="0" width="51" height="12"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{valorLiquido}]]></textFieldExpression>
+				</textField>
+				<textField pattern="0000">
+					<reportElement uuid="c7088211-1c76-460f-bd09-55930e958dc1" x="74" y="0" width="32" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{agencia}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement uuid="f6d31656-cc92-4292-a671-23fd0b55b3a3" x="112" y="0" width="53" height="12"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<summary>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d30b5f0f-1cb6-4edd-92a4-0a4a622d55ba" x="0" y="2" width="42" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="e0ae24bd-76da-4447-b9c6-5162f03d5eca" x="112" y="2" width="53" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalBruto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="0dfbd993-c012-4455-9187-97d75d4f254f" x="169" y="2" width="51" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalLiquido}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="e64dedfe-010f-4566-bbb8-031554b1f4dc" x="0" y="2" width="549" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="cd0dc5eb-3a3d-4edf-98fc-59e963906a84" x="469" y="2" width="80" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{numRegistros}+" registros"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

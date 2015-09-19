@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ConsultasDataSource" language="groovy" pageWidth="595" pageHeight="842" columnWidth="553" leftMargin="21" rightMargin="21" topMargin="21" bottomMargin="21" uuid="779a2d81-d3d5-4152-9af7-fb3733f211bf">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="191"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Row" mode="Transparent" fill="Solid">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#D8D8D8"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="cliente" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="numero" class="java.lang.String"/>
+	<field name="banco" class="java.lang.String"/>
+	<field name="agencia" class="java.lang.String"/>
+	<field name="valor" class="java.math.BigDecimal"/>
+	<field name="valorLiquido" class="java.math.BigDecimal"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="emitente" class="java.lang.String"/>
+	<field name="cadastro" class="java.lang.String"/>
+	<field name="dataEntrada" class="java.lang.String"/>
+	<field name="cliente" class="java.lang.String"/>
+	<variable name="somaBruta" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+	</variable>
+	<variable name="somaLiquida" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorLiquido}]]></variableExpression>
+	</variable>
+	<variable name="somaCheques" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{numero}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="27">
+			<textField pattern="EEEEE, dd MMMMM yyyy - HH:mm">
+				<reportElement uuid="8d6c3d59-6959-4000-aa7f-2055dbe461cc" x="272" y="0" width="280" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="fbfbe506-bdd4-46fa-a902-39cee9bdf692" x="0" y="0" width="272" height="27"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe Script" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ ChequeMate - Consulta Personalizada]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="ce45d31d-dd40-42cd-a120-8bd4acae1aaf" x="459" y="14" width="80" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="1b9ecdd5-2f16-48ab-89fc-6dd476e93a50" x="539" y="14" width="14" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<line>
+				<reportElement uuid="25589341-5029-42ac-bda1-f25485f2c8ff" x="0" y="22" width="551" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="65626e5e-ba84-4437-b8fc-71d5f9c44c2a" x="0" y="11" width="29" height="11"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ Num.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9c8f82e9-59cc-4d4e-af67-8f3b7afcf695" x="29" y="11" width="26" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Banco]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fc6f2cb8-8f9a-4baf-9ae8-97ac1363eb77" x="101" y="11" width="26" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="74c6ced6-b6cc-4cbd-a221-b2393d2d3da7" x="176" y="11" width="122" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Emitente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6cf063cb-3fee-4650-b2fe-8f2e5097bc64" x="301" y="11" width="67" height="11"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[    Cadastro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cde94a2b-221e-43fe-afb6-c4bb3b0f077a" x="55" y="11" width="27" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Ag.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ffd82868-4aef-4c45-9885-b1b406a7d35c" x="133" y="11" width="39" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Venc.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8ca67ab7-e113-42cb-b8a6-ee96008b12bc" x="417" y="11" width="134" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f63dc5e0-bdd9-4181-88f3-044d47cc76ab" x="377" y="11" width="30" height="11"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Entrada]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="9" splitType="Stretch">
+			<frame>
+				<reportElement uuid="b7aaa294-ff56-4ddd-a169-39e1dec5380d" style="Row" mode="Opaque" x="0" y="0" width="552" height="9"/>
+				<textField pattern="">
+					<reportElement uuid="aacdf522-9cd5-4b48-9385-d0bc7bd58dc1" x="0" y="0" width="29" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+				</textField>
+				<textField pattern="">
+					<reportElement uuid="a3b4918b-4d68-4ef5-a8b1-eee6b28de8df" x="29" y="0" width="26" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{banco}]]></textFieldExpression>
+				</textField>
+				<textField pattern="">
+					<reportElement uuid="f0d2ba12-66c4-4ffe-874b-77980a0ebc98" x="55" y="0" width="27" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{agencia}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement uuid="2cd8c629-3e0b-4660-861c-8e2f464d1ded" x="84" y="0" width="43" height="9"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+				</textField>
+				<textField pattern="">
+					<reportElement uuid="bdf64d17-1432-4d4b-8133-787facce01e4" x="133" y="0" width="39" height="9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="76371c66-3a61-4978-b1e9-56dfdd7a21e6" x="178" y="0" width="120" height="9"/>
+					<textElement verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{emitente}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="ce42d727-4035-4c42-858d-413cdd8fda10" x="301" y="0" width="67" height="9"/>
+					<textElement verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cadastro}.length() == 14 ?
+    new StringBuilder(" ").append($F{cadastro}.substring(0, 2))
+     .append(".").append($F{cadastro}.substring(2, 5))
+     .append(".").append($F{cadastro}.substring(5, 8))
+     .append("/").append($F{cadastro}.substring(8, 12))
+     .append("-").append($F{cadastro}.substring(12, 14))
+     .toString() :
+    new StringBuilder(" ").append($F{cadastro}.substring(0, 3))
+     .append(".").append($F{cadastro}.substring(3, 6))
+     .append(".").append($F{cadastro}.substring(6, 9))
+     .append("-").append($F{cadastro}.substring(9, 11))
+     .toString()]]></textFieldExpression>
+				</textField>
+				<textField pattern="">
+					<reportElement uuid="ab4981df-3f50-40ac-ada8-07b4da9fe943" x="377" y="0" width="30" height="9"/>
+					<textElement verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dataEntrada}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="231472eb-fe86-4168-8e92-1af89bfb838a" x="417" y="0" width="134" height="9"/>
+					<textElement verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="1">
+			<line>
+				<reportElement uuid="e5e954b9-6360-4160-a166-b77b5d17fefe" x="0" y="0" width="552" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="6d6334ed-9127-499f-90d5-e3d72aa70e9c" x="0" y="1" width="40" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="214cfc12-eef1-4f7a-b579-819e67aece45" x="66" y="1" width="61" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{somaBruta}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="0e00f0df-6ab9-417c-8750-4f1d916ca656" x="0" y="1" width="551" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="18f224e8-b228-4c1e-a5cf-2041d4cdc837" x="471" y="1" width="80" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{somaCheques}+" registros"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
