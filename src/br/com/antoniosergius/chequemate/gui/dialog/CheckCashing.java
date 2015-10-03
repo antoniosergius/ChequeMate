@@ -110,9 +110,9 @@ public class CheckCashing extends javax.swing.JDialog {
             }
         });
 
+        header.setToolTipText("");
         header.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/x16.cash.png"))); // NOI18N
         header.setTitle("Cálculo de Desconto de Cheques");
-        header.setToolTipText("");
 
         toolbar.setFloatable(false);
         toolbar.setRollover(true);
@@ -323,9 +323,8 @@ public class CheckCashing extends javax.swing.JDialog {
             .addGroup(panelSumLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelSumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelSumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(labelGrossAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelGrossDynamic, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelGrossAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelGrossDynamic, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelError, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelSumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

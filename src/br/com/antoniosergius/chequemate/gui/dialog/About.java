@@ -46,10 +46,10 @@ public class About extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sobre o Sistema e o Desenvolvedor");
 
+        header.setToolTipText("");
         header.setDescription("");
         header.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/x16.info.png"))); // NOI18N
         header.setTitle("ChequeMate - Informações");
-        header.setToolTipText("");
 
         panelDesenvolvedor.setBorder(javax.swing.BorderFactory.createTitledBorder("Desenvolvedor"));
 
@@ -61,9 +61,9 @@ public class About extends javax.swing.JDialog {
 
         labelNomeDyn.setText("Antônio Sérgio Garcia Ferreira");
 
-        labelEmailDyn.setText("antonio.sergius@gmail.com");
+        labelEmailDyn.setText("antoniosergio@mail.com");
 
-        labelTelefonesDyn.setText("(37) 9142-9191 / (37) 3212-8500");
+        labelTelefonesDyn.setText("(37) 8809-1457");
 
         labelImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/x64.java.png"))); // NOI18N
         labelImagem.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -76,13 +76,13 @@ public class About extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(panelDesenvolvedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(labelEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelTelefones, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                    .addComponent(labelTelefones, javax.swing.GroupLayout.PREFERRED_SIZE, 59, Short.MAX_VALUE)
                     .addComponent(labelNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDesenvolvedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(labelNomeDyn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(labelEmailDyn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelTelefonesDyn, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
+                    .addComponent(labelTelefonesDyn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
                 .addComponent(labelImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -146,7 +146,7 @@ public class About extends javax.swing.JDialog {
             .addGroup(jXPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(labelDirChequeMate, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                    .addComponent(labelDirChequeMate, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                     .addComponent(labelSistemaOperacional, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(labelJavaVersao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(labelJavaHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
