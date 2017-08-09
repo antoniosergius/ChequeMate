@@ -1,5 +1,5 @@
 package br.com.antoniosergius.chequemate.gui;
- 
+
 import br.com.antoniosergius.chequemate.ctrl.CheckController;
 import br.com.antoniosergius.chequemate.ctrl.ClientController;
 import br.com.antoniosergius.chequemate.gui.dialog.About;
@@ -45,21 +45,21 @@ import org.jdesktop.swingx.border.DropShadowBorder;
 import org.joda.time.DateMidnight;
 
 public class MainFrame extends javax.swing.JFrame {
-    private static final long serialVersionUID = 1L;
-    private static final Logger LOG = Logger.getLogger(MainFrame.class.getName());
-    
-    private Connection conn;
-    private ClientController clientControl;
-    private CheckController checkControl;
-    private final GregorianCalendar selectedDate = new GregorianCalendar();
-    private MainFrame mainFrame;
-    
-    public MainFrame() {
-        initComponents();
-        setupComponents();
-    }
-    
-    @SuppressWarnings("unchecked")
+   private static final long serialVersionUID = 1L;
+   private static final Logger LOG = Logger.getLogger(MainFrame.class.getName());
+
+   private Connection conn;
+   private ClientController clientControl;
+   private CheckController checkControl;
+   private final GregorianCalendar selectedDate = new GregorianCalendar();
+   private MainFrame mainFrame;
+
+   public MainFrame() {
+      initComponents();
+      setupComponents();
+   }
+
+   @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -925,219 +925,219 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        LoginSystem loginDialog = new LoginSystem(this, true);
-        loginDialog.setLocationRelativeTo(this);
-        loginDialog.setVisible(true);
+      LoginSystem loginDialog = new LoginSystem(this, true);
+      loginDialog.setLocationRelativeTo(this);
+      loginDialog.setVisible(true);
     }//GEN-LAST:event_formWindowOpened
 
     private void menuItemRecordCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRecordCheckActionPerformed
-        openRecordCheck(); 
+      openRecordCheck();
     }//GEN-LAST:event_menuItemRecordCheckActionPerformed
 
     private void menuItemCheckByClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCheckByClientActionPerformed
-        new ReportByClient(this, false, conn, "Relação de Cheques por Cliente:").setVisible(true);
+      new ReportByClient(this, false, conn, "Relação de Cheques por Cliente:").setVisible(true);
     }//GEN-LAST:event_menuItemCheckByClientActionPerformed
 
     private void menuItemQueryInputAndClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemQueryInputAndClientActionPerformed
-        new ReportByClientAndInputDate(this, false, conn).setVisible(true);
+      new ReportByClientAndInputDate(this, false, conn).setVisible(true);
     }//GEN-LAST:event_menuItemQueryInputAndClientActionPerformed
 
     private void menuItemInputRangeAndClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemInputRangeAndClientActionPerformed
-        new ReportByClientAndInputRange(this, false, conn).setVisible(true);
+      new ReportByClientAndInputRange(this, false, conn).setVisible(true);
     }//GEN-LAST:event_menuItemInputRangeAndClientActionPerformed
 
     private void menuItemOpenClientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemOpenClientsActionPerformed
-        openClients();
+      openClients();
     }//GEN-LAST:event_menuItemOpenClientsActionPerformed
 
     private void menuItemSetDataBaseParamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSetDataBaseParamActionPerformed
-        new AlterMySQLParameter(this, false).setVisible(true);
+      new AlterMySQLParameter(this, false).setVisible(true);
     }//GEN-LAST:event_menuItemSetDataBaseParamActionPerformed
 
     private void menuItemChangeLAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemChangeLAFActionPerformed
-        new AlterLookAndFeel(this, true).setVisible(true);
+      new AlterLookAndFeel(this, true).setVisible(true);
     }//GEN-LAST:event_menuItemChangeLAFActionPerformed
 
     private void menuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemExitActionPerformed
-        quitApp();
+      quitApp();
     }//GEN-LAST:event_menuItemExitActionPerformed
 
     private void menuItemOpenChecksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemOpenChecksActionPerformed
-        openSearch();
+      openSearch();
     }//GEN-LAST:event_menuItemOpenChecksActionPerformed
 
     private void buttonConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConsultasActionPerformed
-        openSearch();
+      openSearch();
     }//GEN-LAST:event_buttonConsultasActionPerformed
 
     private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
-        quitApp();
+      quitApp();
     }//GEN-LAST:event_buttonSairActionPerformed
 
     private void buttonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarActionPerformed
-        openRecordCheck(); 
+      openRecordCheck();
     }//GEN-LAST:event_buttonCadastrarActionPerformed
 
     private void buttonClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClientesActionPerformed
-        openClients();
+      openClients();
     }//GEN-LAST:event_buttonClientesActionPerformed
 
     private void monthViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthViewActionPerformed
-        selectDate();
+      selectDate();
     }//GEN-LAST:event_monthViewActionPerformed
 
     private void menuItemParametersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemParametersActionPerformed
-        new AlterParameters(this, true, conn).setVisible(true);
+      new AlterParameters(this, true, conn).setVisible(true);
     }//GEN-LAST:event_menuItemParametersActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        quitApp();
+      quitApp();
     }//GEN-LAST:event_formWindowClosing
 
     private void menuItemHolidaysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemHolidaysActionPerformed
-        new ViewAllHolidays(this, false).setVisible(true);
+      new ViewAllHolidays(this, false).setVisible(true);
     }//GEN-LAST:event_menuItemHolidaysActionPerformed
 
     private void labelConsultarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelConsultarMouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
+      setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_labelConsultarMouseEntered
 
     private void labelConsultarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelConsultarMouseExited
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_labelConsultarMouseExited
 
     private void labelClientesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelClientesMouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
+      setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_labelClientesMouseEntered
 
     private void labelClientesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelClientesMouseExited
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_labelClientesMouseExited
 
     private void labelCadastrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCadastrarMouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
+      setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_labelCadastrarMouseEntered
 
     private void labelCadastrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCadastrarMouseExited
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_labelCadastrarMouseExited
 
     private void menuItemAddClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAddClientActionPerformed
-        new AddClient(this, false, conn, null).setVisible(true);
+      new AddClient(this, false, conn, null).setVisible(true);
     }//GEN-LAST:event_menuItemAddClientActionPerformed
 
     private void buttonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRefreshActionPerformed
-        updateSystemInfo();
+      updateSystemInfo();
     }//GEN-LAST:event_buttonRefreshActionPerformed
 
     private void menuItemBackupCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemBackupCreateActionPerformed
-        openBackup();
+      openBackup();
     }//GEN-LAST:event_menuItemBackupCreateActionPerformed
 
     private void menuItemBackupRestoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemBackupRestoreActionPerformed
-        new RestoreBuilder(this, true).setVisible(true);
+      new RestoreBuilder(this, true).setVisible(true);
     }//GEN-LAST:event_menuItemBackupRestoreActionPerformed
 
     private void menuItemSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSobreActionPerformed
-        new About(this, true).setVisible(true);
+      new About(this, true).setVisible(true);
     }//GEN-LAST:event_menuItemSobreActionPerformed
 
     private void menuItemSimuladorEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSimuladorEmprestimoActionPerformed
-        new LoanSimulator(this, true).setVisible(true);
+      new LoanSimulator(this, true).setVisible(true);
     }//GEN-LAST:event_menuItemSimuladorEmprestimoActionPerformed
 
     private void menuItemCalcularDescontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCalcularDescontoActionPerformed
-        new CheckCashing(this, false).setVisible(true);
+      new CheckCashing(this, false).setVisible(true);
     }//GEN-LAST:event_menuItemCalcularDescontoActionPerformed
 
     private void labelCalcularDescontoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCalcularDescontoMouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
+      setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_labelCalcularDescontoMouseEntered
 
     private void labelCalcularDescontoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCalcularDescontoMouseExited
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_labelCalcularDescontoMouseExited
 
     private void labelSimularEmprestimoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSimularEmprestimoMouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
+      setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_labelSimularEmprestimoMouseEntered
 
     private void labelSimularEmprestimoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSimularEmprestimoMouseExited
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_labelSimularEmprestimoMouseExited
 
     private void menuItemPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemPreferencesActionPerformed
-        new AlterPreferences(this, true).setVisible(true);
+      new AlterPreferences(this, true).setVisible(true);
     }//GEN-LAST:event_menuItemPreferencesActionPerformed
 
     private void menuItemEmitentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemEmitentesActionPerformed
-        openPayees();
+      openPayees();
     }//GEN-LAST:event_menuItemEmitentesActionPerformed
 
     private void labelEmitentesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelEmitentesMouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
+      setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_labelEmitentesMouseEntered
 
     private void labelEmitentesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelEmitentesMouseExited
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_labelEmitentesMouseExited
 
     private void labelEmitentesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelEmitentesMousePressed
-        openPayees();
+      openPayees();
     }//GEN-LAST:event_labelEmitentesMousePressed
 
     private void labelClientesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelClientesMousePressed
-        openClients();
+      openClients();
     }//GEN-LAST:event_labelClientesMousePressed
 
     private void labelConsultarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelConsultarMousePressed
-        openSearch();
+      openSearch();
     }//GEN-LAST:event_labelConsultarMousePressed
 
     private void labelCadastrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCadastrarMousePressed
-        openRecordCheck();     
+      openRecordCheck();
     }//GEN-LAST:event_labelCadastrarMousePressed
 
     private void labelSimularEmprestimoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSimularEmprestimoMousePressed
-        new LoanSimulator(this, true).setVisible(true);
+      new LoanSimulator(this, true).setVisible(true);
     }//GEN-LAST:event_labelSimularEmprestimoMousePressed
 
     private void labelCalcularDescontoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCalcularDescontoMousePressed
-        new CheckCashing(this, false).setVisible(true);
+      new CheckCashing(this, false).setVisible(true);
     }//GEN-LAST:event_labelCalcularDescontoMousePressed
 
     private void menuItemVisualizarRetencoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVisualizarRetencoesActionPerformed
-        openRetentions();
+      openRetentions();
     }//GEN-LAST:event_menuItemVisualizarRetencoesActionPerformed
 
     private void menuItemBetweenDatesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemBetweenDatesActionPerformed
-        new BetweenDates(this, true).setVisible(true);
+      new BetweenDates(this, true).setVisible(true);
     }//GEN-LAST:event_menuItemBetweenDatesActionPerformed
 
     private void menuItemConsultaExtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemConsultaExtActionPerformed
-        openExtendedSearch();
+       openExtendedSearch();
     }//GEN-LAST:event_menuItemConsultaExtActionPerformed
 
     private void labelConsultaExtendidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelConsultaExtendidaMouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
+      setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_labelConsultaExtendidaMouseEntered
 
     private void labelConsultaExtendidaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelConsultaExtendidaMouseExited
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_labelConsultaExtendidaMouseExited
 
     private void labelConsultaExtendidaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelConsultaExtendidaMousePressed
-        openExtendedSearch();
+      openExtendedSearch();
     }//GEN-LAST:event_labelConsultaExtendidaMousePressed
 
     private void menuChequesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuChequesActionPerformed
-        openRecordCheck();
+      openRecordCheck();
     }//GEN-LAST:event_menuChequesActionPerformed
 
-    public static void init() {
-        java.awt.EventQueue.invokeLater(new Main());
-    }
-    
+   public static void init() {
+      java.awt.EventQueue.invokeLater(new Main());
+   }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCadastrar;
     private javax.swing.JButton buttonClientes;
@@ -1222,308 +1222,288 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar toolBar;
     // End of variables declaration//GEN-END:variables
 
-    
-    
-    private void openRecordCheck() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    if (hasClient()) {
-                        new RegisterCheckFrame(mainFrame, conn).setVisible(true);
-                    }
-                } catch (SQLException ex) {
-                    sqlExceptionMessage(ex.getMessage());
-                    LOG.log(Level.SEVERE, null, ex);
-                }
+   private void openRecordCheck() {
+      SwingUtilities.invokeLater(() -> {
+         try {
+            if (hasClient()) {
+               new RegisterCheckFrame(mainFrame, conn).setVisible(true);
             }
-        }); 
-    }
+         } catch (SQLException ex) {
+            sqlExceptionMessage(ex.getMessage());
+            LOG.log(Level.SEVERE, null, ex);
+         }
+      });
+   }
 
-    private void openClients() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    if (hasClient()) {
-                        new ViewAllClients(mainFrame, false, conn).setVisible(true);
-                    }
-                } catch (SQLException ex) {
-                    sqlExceptionMessage(ex.getMessage());
-                    LOG.log(Level.SEVERE, null, ex);
-                }
+   private void openClients() {
+      SwingUtilities.invokeLater(() -> {
+         try {
+            if (hasClient()) {
+               new ViewAllClients(mainFrame, false, conn).setVisible(true);
             }
-        });
-    }
+         } catch (SQLException ex) {
+            sqlExceptionMessage(ex.getMessage());
+            LOG.log(Level.SEVERE, null, ex);
+         }
+      });
+   }
 
-    private void openSearch() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    if (hasClient()) {
-                        new QueryCheckFrame(conn, mainFrame).setVisible(true);
-                    }
-                } catch (SQLException ex) {
-                    sqlExceptionMessage(ex.getMessage());
-                    LOG.log(Level.SEVERE, null, ex);
-                }
+   private void openSearch() {
+      SwingUtilities.invokeLater(() -> {
+         try {
+            if (hasClient()) {
+               new QueryCheckFrame(conn, mainFrame).setVisible(true);
             }
-        });    
-    }
+         } catch (SQLException ex) {
+            sqlExceptionMessage(ex.getMessage());
+            LOG.log(Level.SEVERE, null, ex);
+         }
+      });
+   }
 
-    private void openExtendedSearch() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    if (hasClient()) {
-                        new QueryExtCheckFrame(conn, mainFrame).setVisible(true);
-                    }
-                } catch (SQLException ex) {
-                    sqlExceptionMessage(ex.getMessage());
-                    LOG.log(Level.SEVERE, null, ex);
-                }
+   private void openExtendedSearch() {
+      SwingUtilities.invokeLater(() -> {
+         try {
+            if (hasClient()) {
+               new QueryExtCheckFrame(conn, mainFrame).setVisible(true);
             }
-        });
-    }
+         } catch (SQLException ex) {
+            sqlExceptionMessage(ex.getMessage());
+            LOG.log(Level.SEVERE, null, ex);
+         }
+      });
+   }
 
-    private void openPayees() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    if (hasClient()) {
-                        new ViewAllPayees(mainFrame, false, conn).setVisible(true);
-                    }
-                } catch (SQLException ex) {
-                    sqlExceptionMessage(ex.getMessage());
-                    LOG.log(Level.SEVERE, null, ex);
-                }
+   private void openPayees() {
+      SwingUtilities.invokeLater(() -> {
+         try {
+            if (hasClient()) {
+               new ViewAllPayees(mainFrame, false, conn).setVisible(true);
             }
-        }); 
-    }
-    
-    private void quitApp(){
-        try {
-            ChequeMate.disconnectDB(conn);
-        } catch (SQLException ex) {
-            LOG.log(Level.SEVERE, ex.getMessage(), ex);
-        } finally {
-            System.exit(0);
-        }
-    }
+         } catch (SQLException ex) {
+            sqlExceptionMessage(ex.getMessage());
+            LOG.log(Level.SEVERE, null, ex);
+         }
+      });
+   }
 
-    private void openRetentions() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    if (hasClient()) {
-                        try {
-                            if (MyPath.hasRegistriesFiles()) {
-                                new ViewAllRetentions(mainFrame, false, conn).setVisible(true);
-                            } else {
-                                ChequeMate.showWarningMessage(mainFrame, 
-                                        "Aviso", "Não foi encontrado arquivo de cadastro recente.");
-                            }
-                        } catch (IOException ex) {
-                            LOG.log(Level.SEVERE, ex.getMessage(), ex);
-                        }
-                    }
-                } catch (SQLException ex) {   
-                    sqlExceptionMessage(ex.getMessage());
-                    LOG.log(Level.SEVERE, null, ex);
-                }
-            }
-        }); 
-    }
+   private void quitApp() {
+      try {
+         ChequeMate.disconnectDB(conn);
+      } catch (SQLException ex) {
+         LOG.log(Level.SEVERE, ex.getMessage(), ex);
+      } finally {
+         System.exit(0);
+      }
+   }
 
-    private void openBackup() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    if (hasClient()) {
-                        new BackupBuilder(mainFrame, true).setVisible(true);
-                    }
-                } catch (SQLException ex) {
-                    sqlExceptionMessage(ex.getMessage());
-                    LOG.log(Level.SEVERE, null, ex);
-                }
+   private void openRetentions() {
+      SwingUtilities.invokeLater(() -> {
+         try {
+            if (hasClient()) {
+               try {
+                  if (MyPath.hasRegistriesFiles()) {
+                     new ViewAllRetentions(mainFrame, false, conn).setVisible(true);
+                  } else {
+                     ChequeMate.showWarningMessage(mainFrame,
+                             "Aviso", "Não foi encontrado arquivo de cadastro recente.");
+                  }
+               } catch (IOException ex) {
+                  LOG.log(Level.SEVERE, ex.getMessage(), ex);
+               }
             }
-        }); 
-    }
-    
-    private static class Main implements Runnable {
-        @Override
-        public void run() {
+         } catch (SQLException ex) {
+            sqlExceptionMessage(ex.getMessage());
+            LOG.log(Level.SEVERE, null, ex);
+         }
+      });
+   }
+
+   private void openBackup() {
+      SwingUtilities.invokeLater(new Runnable() {
+         @Override
+         public void run() {
             try {
-                ChequeMate.setConfiguration(ChequeMate.XSTREAM.read());
-                ChequeMate.verifyFolders();
-                ChequeMate.applyLAF();
-            } catch (IOException ex) {
-                LOG.log(Level.SEVERE, ex.getMessage(), ex);
-                ChequeMate.showErrorMessage(null, ex.getMessage());
-                System.exit(-1);
+               if (hasClient()) {
+                  new BackupBuilder(mainFrame, true).setVisible(true);
+               }
+            } catch (SQLException ex) {
+               sqlExceptionMessage(ex.getMessage());
+               LOG.log(Level.SEVERE, null, ex);
             }
-            new MainFrame().setVisible(true);
-        }
-    }
-    
-    private void setupComponents() {
-        taskPane.setBorder(new DropShadowBorder());
-        monthView.setVisible(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setTitle("ChequeMate - Descontos e Cadastro de Cheques - Versão "+ChequeMate.VERSION);
-        setIconImage(new ImageIcon(getClass().getResource("/img/ico.chequemate.png")).getImage());
-        labelTodayDate.setText(Format.todayDate());
-        labelDataBase.setText("Esperando");
-        mainFrame = this;
-    }
+         }
+      });
+   }
 
-    public void updateSystemInfo() {
-        setCursor(new Cursor(Cursor.WAIT_CURSOR));
-        double grossAmount = 0;
-        double grossByMonth = 0;
-        int checkAmount = 0;
-        int activeClients = 0;
-        int clientAmount = 0;
-        String higherClient = "";
-        String lowerClient = "";
-        int recordedToday = 0;
-        double amountRecordedToday = 0;
-        double amountUnexpired = 0;
-        double todayRetention = 0;
-        double leftInMonth = 0;
-        try {
-            grossAmount = checkControl.getGrossAmount();
-            grossByMonth = checkControl.getGrossAmount(Days.TODAY.get(GregorianCalendar.MONTH));
-            checkAmount = checkControl.count();
-            clientAmount = clientControl.count();
-            activeClients = clientControl.countActive();
-            higherClient = clientControl.getHigher();
-            lowerClient = clientControl.getLower();
-            recordedToday = checkControl.countRegisteredToday();
-            amountRecordedToday = checkControl.sumGrossRegisteredToday();
-            amountUnexpired = checkControl.getGrossAmountUnexpired();
-            todayRetention = checkControl.getTodayRetention();
-            
-            GregorianCalendar date = new GregorianCalendar();
-            int currentMonth = date.get(GregorianCalendar.MONTH);
-            while(date.get(GregorianCalendar.MONTH)==currentMonth) {
-                date.add(GregorianCalendar.DAY_OF_YEAR, 1);
-            }
-            leftInMonth = checkControl.sumGrossLeftInMonth(date);
-        } catch (SQLException ex) {
+   private static class Main implements Runnable {
+      @Override
+      public void run() {
+         try {
+            ChequeMate.setConfiguration(ChequeMate.XSTREAM.read());
+            ChequeMate.verifyFolders();
+            ChequeMate.applyLAF();
+         } catch (IOException ex) {
             LOG.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-        double averageClient = 0;
-        double averageCheck = 0;
-        if (activeClients!=0) {
-            averageClient = grossAmount/activeClients;
-        }
-        if (checkAmount!=0) {
-            averageCheck = grossAmount/checkAmount;
-        }
-        labelGrossAmount.setText(Format.decimal(grossAmount));
-        labelGrossByMonth.setText(Format.decimal(grossByMonth));
-        labelCheckAmount.setText(String.valueOf(checkAmount));
-        labelAverageByClient.setText(Format.decimal(averageClient));
-        labelAverageByCheck.setText(Format.decimal(averageCheck));
-        labelHigherClient.setText(higherClient);
-        labelClientAmount.setText(String.valueOf(clientAmount));
-        labelLowerClient.setText(lowerClient);
-        labelActiveClientAmount.setText(String.valueOf(activeClients));
-        labelAmountUnexpired.setText(Format.decimal(amountUnexpired));
-        labelAmountRecordedToday.setText(Format.decimal(amountRecordedToday));
-        labelTodayRetention.setText(Format.decimal(todayRetention));
-        labelRecordedToday.setText(String.valueOf(recordedToday));
-        labelMonthAmountLeft.setText(Format.decimal(leftInMonth));
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }
-    
-    private void selectDate() {
-        Date date = monthView.getSelectionDate();
-        if (monthView.getToday().before(date)) {
-            selectedDate.setTime(date);
-            int daysBetween = Days.between(Days.TODAY, selectedDate);
-            if (daysBetween != 1) {
-                StringBuilder temp = new StringBuilder();
-                temp.append("De hoje até dia ");
-                temp.append(Format.date(date));
-                temp.append(" são ");
-                temp.append(daysBetween);
-                temp.append(" dias.");
-                labelDaysBetween.setText(temp.toString());
-            }
-        } else {
-            labelDaysBetween.setText("");
-        }
-    }
-    
-    private void showToolTipHoliday(MouseEvent evt) {
-        Date date = monthView.getDayAtLocation(evt.getX(), evt.getY());
-        if (date!=null) {
-            selectedDate.setTime(date);
-            HashMap <DateMidnight, Holiday> holidayMap = ChequeMate.getHolidayControl().getMap();
-            DateMidnight dateMid = new DateMidnight(selectedDate.getTimeInMillis());
-            if (holidayMap.containsKey(dateMid)) {
-                monthView.setToolTipText(holidayMap.get(dateMid).getDescription());
-                monthView.createToolTip().setVisible(true);
-            }
-        } 
-    }
-    
-    public void setConnection(Connection conn) {
-        this.conn = conn;
-        clientControl = new ClientController(conn);
-        checkControl = new CheckController(conn);
-        monthView.setVisible(true);
-        monthView.setFlaggedDates(ChequeMate.getHolidayControl().getArrayDate());
-        monthView.setFlaggedDayForeground(Color.red);
-        try {
-            ChequeMate.deleteOldRecords(checkControl);
-        } catch (SQLException ex) {
-            LOG.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-        setStatusBarMessage("Conectado");
-        updateSystemInfo();
-    }
-    
-    public void setStatusBarMessage(String message) {
-        if (message.equals("Conectado")) {
-            labelDataBase.setEnabled(true);
-        } else {
-            labelDataBase.setEnabled(false);
-        }   
-        labelDataBase.setText(message);
-    }
-    
-    private boolean hasClient() throws SQLException{
-        int countClients = clientControl.count();
-        if (countClients == 0) {
-            int choice = JOptionPane.showConfirmDialog(this,
-                    "O sistema não possui cliente cadastrado. Deseja incluir agora?",
-                    "Aviso", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (choice == JOptionPane.YES_OPTION) {
-                AddClient addClient = new AddClient(this, false, conn, null);
-                addClient.setVisible(true);
-            }
-            return false;
-        } else {
-            return true;
-        }
-    }
-    
-    public void sqlExceptionMessage(String exMessage) {
-        StringBuilder errorMsg = new StringBuilder();
-        errorMsg.append("O conexão com o banco de dados caiu.");
-        errorMsg.append(" O sistema tentará reconectar. Caso o erro persista entre em contato com o administrador.");
-        errorMsg.append("\n\nMensagem do sistema: ");
-        errorMsg.append(exMessage);
-        ChequeMate.showErrorMessage(mainFrame,"Erro no Banco de dados", errorMsg.toString());
-    }
+            ChequeMate.showErrorMessage(null, ex.getMessage());
+            System.exit(-1);
+         }
+         new MainFrame().setVisible(true);
+      }
+   }
+
+   private void setupComponents() {
+      taskPane.setBorder(new DropShadowBorder());
+      monthView.setVisible(false);
+      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      setLocationRelativeTo(null);
+      setExtendedState(JFrame.MAXIMIZED_BOTH);
+      setTitle("ChequeMate - Descontos e Cadastro de Cheques - Versão " + ChequeMate.VERSION);
+      setIconImage(new ImageIcon(getClass().getResource("/img/ico.chequemate.png")).getImage());
+      labelTodayDate.setText(Format.todayDate());
+      labelDataBase.setText("Esperando");
+      mainFrame = this;
+   }
+
+   public void updateSystemInfo() {
+      setCursor(new Cursor(Cursor.WAIT_CURSOR));
+      double grossAmount = 0;
+      double grossByMonth = 0;
+      int checkAmount = 0;
+      int activeClients = 0;
+      int clientAmount = 0;
+      String higherClient = "";
+      String lowerClient = "";
+      int recordedToday = 0;
+      double amountRecordedToday = 0;
+      double amountUnexpired = 0;
+      double todayRetention = 0;
+      double leftInMonth = 0;
+      try {
+         grossAmount = checkControl.getGrossAmount();
+         grossByMonth = checkControl.getGrossAmount(Days.TODAY.get(GregorianCalendar.MONTH));
+         checkAmount = checkControl.count();
+         clientAmount = clientControl.count();
+         activeClients = clientControl.countActive();
+         higherClient = clientControl.getHigher();
+         lowerClient = clientControl.getLower();
+         recordedToday = checkControl.countRegisteredToday();
+         amountRecordedToday = checkControl.sumGrossRegisteredToday();
+         amountUnexpired = checkControl.getGrossAmountUnexpired();
+         todayRetention = checkControl.getTodayRetention();
+
+         GregorianCalendar date = new GregorianCalendar();
+         int currentMonth = date.get(GregorianCalendar.MONTH);
+         while (date.get(GregorianCalendar.MONTH) == currentMonth) {
+            date.add(GregorianCalendar.DAY_OF_YEAR, 1);
+         }
+         leftInMonth = checkControl.sumGrossLeftInMonth(date);
+      } catch (SQLException ex) {
+         LOG.log(Level.SEVERE, ex.getMessage(), ex);
+      }
+      double averageClient = 0;
+      double averageCheck = 0;
+      if (activeClients != 0) {
+         averageClient = grossAmount / activeClients;
+      }
+      if (checkAmount != 0) {
+         averageCheck = grossAmount / checkAmount;
+      }
+      labelGrossAmount.setText(Format.decimal(grossAmount));
+      labelGrossByMonth.setText(Format.decimal(grossByMonth));
+      labelCheckAmount.setText(String.valueOf(checkAmount));
+      labelAverageByClient.setText(Format.decimal(averageClient));
+      labelAverageByCheck.setText(Format.decimal(averageCheck));
+      labelHigherClient.setText(higherClient);
+      labelClientAmount.setText(String.valueOf(clientAmount));
+      labelLowerClient.setText(lowerClient);
+      labelActiveClientAmount.setText(String.valueOf(activeClients));
+      labelAmountUnexpired.setText(Format.decimal(amountUnexpired));
+      labelAmountRecordedToday.setText(Format.decimal(amountRecordedToday));
+      labelTodayRetention.setText(Format.decimal(todayRetention));
+      labelRecordedToday.setText(String.valueOf(recordedToday));
+      labelMonthAmountLeft.setText(Format.decimal(leftInMonth));
+      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+   }
+
+   private void selectDate() {
+      Date date = monthView.getSelectionDate();
+      if (monthView.getToday().before(date)) {
+         selectedDate.setTime(date);
+         int daysBetween = Days.between(Days.TODAY, selectedDate);
+         if (daysBetween != 1) {
+            StringBuilder temp = new StringBuilder();
+            temp.append("De hoje até dia ");
+            temp.append(Format.date(date));
+            temp.append(" são ");
+            temp.append(daysBetween);
+            temp.append(" dias.");
+            labelDaysBetween.setText(temp.toString());
+         }
+      } else {
+         labelDaysBetween.setText("");
+      }
+   }
+
+   private void showToolTipHoliday(MouseEvent evt) {
+      Date date = monthView.getDayAtLocation(evt.getX(), evt.getY());
+      if (date != null) {
+         selectedDate.setTime(date);
+         HashMap<DateMidnight, Holiday> holidayMap = ChequeMate.getHolidayControl().getMap();
+         DateMidnight dateMid = new DateMidnight(selectedDate.getTimeInMillis());
+         if (holidayMap.containsKey(dateMid)) {
+            monthView.setToolTipText(holidayMap.get(dateMid).getDescription());
+            monthView.createToolTip().setVisible(true);
+         }
+      }
+   }
+
+   public void setConnection(Connection conn) {
+      this.conn = conn;
+      clientControl = new ClientController(conn);
+      checkControl = new CheckController(conn);
+      monthView.setVisible(true);
+      monthView.setFlaggedDates(ChequeMate.getHolidayControl().getArrayDate());
+      monthView.setFlaggedDayForeground(Color.red);
+      try {
+         ChequeMate.deleteOldRecords(checkControl);
+      } catch (SQLException ex) {
+         LOG.log(Level.SEVERE, ex.getMessage(), ex);
+      }
+      setStatusBarMessage("Conectado");
+      updateSystemInfo();
+   }
+
+   public void setStatusBarMessage(String message) {
+      if (message.equals("Conectado")) {
+         labelDataBase.setEnabled(true);
+      } else {
+         labelDataBase.setEnabled(false);
+      }
+      labelDataBase.setText(message);
+   }
+
+   private boolean hasClient() throws SQLException {
+      int countClients = clientControl.count();
+      if (countClients == 0) {
+         int choice = JOptionPane.showConfirmDialog(this,
+                 "O sistema não possui cliente cadastrado. Deseja incluir agora?",
+                 "Aviso", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+         if (choice == JOptionPane.YES_OPTION) {
+            AddClient addClient = new AddClient(this, false, conn, null);
+            addClient.setVisible(true);
+         }
+         return false;
+      } else {
+         return true;
+      }
+   }
+
+   public void sqlExceptionMessage(String exMessage) {
+      StringBuilder errorMsg = new StringBuilder();
+      errorMsg.append("O conexão com o banco de dados caiu.");
+      errorMsg.append(" O sistema tentará reconectar. Caso o erro persista entre em contato com o administrador.");
+      errorMsg.append("\n\nMensagem do sistema: ");
+      errorMsg.append(exMessage);
+      ChequeMate.showErrorMessage(mainFrame, "Erro no Banco de dados", errorMsg.toString());
+   }
 }

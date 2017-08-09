@@ -197,7 +197,7 @@ public class LoginSystem extends javax.swing.JDialog {
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
         dispose();
-        System.exit(1);
+        System.exit(0);
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void buttonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogarActionPerformed
@@ -301,6 +301,4 @@ public class LoginSystem extends javax.swing.JDialog {
            labelCapsLock.setText("");
         }
     }
-    
-    
 }
