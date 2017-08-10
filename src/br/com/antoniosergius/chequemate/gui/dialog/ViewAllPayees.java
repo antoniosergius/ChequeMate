@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
@@ -34,6 +35,7 @@ import org.pushingpixels.substance.api.renderers.SubstanceDefaultTableCellRender
 public class ViewAllPayees extends javax.swing.JDialog {
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = Logger.getLogger(ViewAllPayees.class.getName());
+    private static final int CPF_CNPJ_COLUNM = 1;
     
     private Connection conn;
     private Payee searchObj;
@@ -78,6 +80,8 @@ public class ViewAllPayees extends javax.swing.JDialog {
       labelTotalDin = new org.jdesktop.swingx.JXLabel();
       scrollPane = new javax.swing.JScrollPane();
       tablePayeeExt = new javax.swing.JTable();
+      jScrollPane2 = new javax.swing.JScrollPane();
+      emitenteClientesList = new javax.swing.JList<>();
 
       menuItemVerifyPayee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/x16.view.png"))); // NOI18N
       menuItemVerifyPayee.setText("Verificar Cheques em Aberto...");
@@ -162,7 +166,7 @@ public class ViewAllPayees extends javax.swing.JDialog {
                   .addComponent(textFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                   .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                   .addComponent(buttonClean1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 386, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 560, Short.MAX_VALUE)
             .addComponent(jXLabelImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addContainerGap())
       );
@@ -273,6 +277,9 @@ public class ViewAllPayees extends javax.swing.JDialog {
       scrollPane.setViewportView(tablePayeeExt);
       tablePayeeExt.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
+      emitenteClientesList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+      jScrollPane2.setViewportView(emitenteClientesList);
+
       javax.swing.GroupLayout panelMainLayout = new javax.swing.GroupLayout(panelMain);
       panelMain.setLayout(panelMainLayout);
       panelMainLayout.setHorizontalGroup(
@@ -282,9 +289,15 @@ public class ViewAllPayees extends javax.swing.JDialog {
          .addGroup(panelMainLayout.createSequentialGroup()
             .addContainerGap()
             .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-               .addComponent(panelForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-               .addComponent(scrollPane)
-               .addComponent(panelResults, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+               .addComponent(panelResults, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+               .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                  .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelMainLayout.createSequentialGroup()
+                     .addComponent(panelForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                     .addGap(0, 0, Short.MAX_VALUE))
+                  .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelMainLayout.createSequentialGroup()
+                     .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE)
+                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                     .addComponent(jScrollPane2))))
             .addContainerGap())
       );
       panelMainLayout.setVerticalGroup(
@@ -296,17 +309,19 @@ public class ViewAllPayees extends javax.swing.JDialog {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(panelForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+               .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+               .addComponent(jScrollPane2))
             .addGap(8, 8, 8)
             .addComponent(panelResults, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap(12, Short.MAX_VALUE))
       );
 
       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
       getContentPane().setLayout(layout);
       layout.setHorizontalGroup(
          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+         .addComponent(panelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
       );
       layout.setVerticalGroup(
          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,16 +381,22 @@ public class ViewAllPayees extends javax.swing.JDialog {
     }//GEN-LAST:event_menuItemVerifyPayeeActionPerformed
 
     private void tablePayeeExtMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePayeeExtMouseReleased
-        if (SwingUtilities.isRightMouseButton(evt)) {
-            Point p = evt.getPoint();
-            int rowNumber = tablePayeeExt.rowAtPoint( p );
-            if (rowNumber != -1) {
-                tablePayeeExt.setRowSelectionInterval(rowNumber, rowNumber);
-                if (evt.isPopupTrigger()) {
-                    popupTableMenu.show(tablePayeeExt, evt.getX(), evt.getY());
-                }
-            }    
-        }    
+      if (SwingUtilities.isRightMouseButton(evt)) {
+         Point p = evt.getPoint();
+         int rowNumber = tablePayeeExt.rowAtPoint( p );
+         if (rowNumber != -1) {
+            tablePayeeExt.setRowSelectionInterval(rowNumber, rowNumber);
+            if (evt.isPopupTrigger()) {
+               popupTableMenu.show(tablePayeeExt, evt.getX(), evt.getY());
+            }
+         }    
+      } else {
+         if (tablePayeeExt.getSelectedRow() != -1) {
+            int modelIndex = tablePayeeExt.convertRowIndexToModel(tablePayeeExt.getSelectedRow());
+            PayeeExt payee = payeeExtList.get(modelIndex);
+            //fill list with clients
+         }
+      }    
     }//GEN-LAST:event_tablePayeeExtMouseReleased
 
     private void tablePayeeExtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePayeeExtMouseClicked
@@ -396,7 +417,9 @@ public class ViewAllPayees extends javax.swing.JDialog {
    private org.jdesktop.swingx.JXButton buttonClose;
    private org.jdesktop.swingx.JXButton buttonPrint;
    private org.jdesktop.swingx.JXButton buttonRefresh;
+   private javax.swing.JList<String> emitenteClientesList;
    private org.jdesktop.swingx.JXHeader header;
+   private javax.swing.JScrollPane jScrollPane2;
    private org.jdesktop.swingx.JXLabel jXLabelImagem;
    private org.jdesktop.swingx.JXLabel labelName;
    private org.jdesktop.swingx.JXLabel labelRegistry;
@@ -544,5 +567,11 @@ public class ViewAllPayees extends javax.swing.JDialog {
 
    private void openSignature() {
       new ViewSignature(null, true).setVisible(true);
+   }
+   
+   private void setupList() {
+      DefaultListModel model = new DefaultListModel();
+      emitenteClientesList.setModel(model);
+      
    }
 }
