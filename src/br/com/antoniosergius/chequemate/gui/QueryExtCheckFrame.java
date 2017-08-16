@@ -679,8 +679,9 @@ public class QueryExtCheckFrame extends javax.swing.JFrame {
         clearForm(false);
         query = new QueryExt();
         GregorianCalendar max = new GregorianCalendar();
-        Days.setToLastMinute(max);
+        Days.setTodayToMidnight();
         query.setLowestInput(Days.TODAY);
+        Days.setToLastMinute(max);
         query.setHighestInput(max);
         datePickerLowestInput.setDate(Days.TODAY.getTime());
         datePickerHighestInput.setDate(max.getTime());

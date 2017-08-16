@@ -1,6 +1,7 @@
 package br.com.antoniosergius.chequemate.obj;
 
 import br.com.antoniosergius.lib.tools.Format;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class PayeeExt extends Payee{
@@ -11,6 +12,7 @@ public class PayeeExt extends Payee{
     private GregorianCalendar firstCheckInput;
     private GregorianCalendar lastCheckInput;
     private int checkCount;
+    private ArrayList<String> clientList;
 
     public PayeeExt(String name, String registryNumber) {
         super(name, registryNumber);
@@ -42,6 +44,19 @@ public class PayeeExt extends Payee{
         this.lastCheckInput = new GregorianCalendar();
         this.checkCount = 1;
     }
+
+   public PayeeExt(String name, String registryNumber, double higherCheckValue, 
+           GregorianCalendar firstCheckInput, GregorianCalendar lastCheckInput, int checkCount,
+           ArrayList<String> clientList) {
+      super(name, registryNumber);
+      this.higherCheckValue = higherCheckValue;
+      this.firstCheckInput = firstCheckInput;
+      this.lastCheckInput = lastCheckInput;
+      this.checkCount = checkCount;
+      this.clientList = clientList;
+   }
+    
+    
     
     public int getId() {
         return id;
@@ -83,6 +98,16 @@ public class PayeeExt extends Payee{
         this.checkCount = checkCount;
     }
 
+   public ArrayList<String> getClientList() {
+      return clientList;
+   }
+
+   public void setClientList(ArrayList<String> clientList) {
+      this.clientList = clientList;
+   }
+
+    
+    
     @Override
     public String toString() {
         StringBuilder tmp = new StringBuilder();

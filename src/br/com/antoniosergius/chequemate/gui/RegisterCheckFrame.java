@@ -2,6 +2,7 @@ package br.com.antoniosergius.chequemate.gui;
 
 import br.com.antoniosergius.chequemate.ctrl.CheckController;
 import br.com.antoniosergius.chequemate.ctrl.ClientController;
+import br.com.antoniosergius.chequemate.ctrl.PayeeClientsController;
 import br.com.antoniosergius.chequemate.ctrl.PayeeController;
 import br.com.antoniosergius.chequemate.gui.dialog.AddMultipleChecks;
 import br.com.antoniosergius.chequemate.gui.dialog.AddSuffixPayee;
@@ -65,6 +66,7 @@ public class RegisterCheckFrame extends javax.swing.JFrame {
     private final PayeeController payeeControl;
     private final CheckController checkControl;
     private final ClientController clientControl;
+    private final PayeeClientsController payeeClientsControl;
     
     private RecordCheck record;
     private final Connection conn;
@@ -86,6 +88,7 @@ public class RegisterCheckFrame extends javax.swing.JFrame {
         checkControl = new CheckController(conn);
         payeeControl = new PayeeController(conn);
         clientControl = new ClientController(conn);
+        payeeClientsControl = new PayeeClientsController(conn);
         hasSaved = false;
         this.conn = conn;
         this.mainFrame = mainFrame;
@@ -1267,6 +1270,17 @@ public class RegisterCheckFrame extends javax.swing.JFrame {
             }      
         }
     }
+    
+    /*private void updatePayeesHistory2() {
+        if (hasSaved) {
+            try {
+                payeeControl.updateFromCheckList(record.getList());
+                payeeClientsControl.updateFromCheckList(record.getList());
+            } catch (SQLException ex) {
+                LOG.log(Level.SEVERE, null, ex);
+            }      
+        }
+    }*/
 
     private void setFormToNewRecord() {
         modified = false;

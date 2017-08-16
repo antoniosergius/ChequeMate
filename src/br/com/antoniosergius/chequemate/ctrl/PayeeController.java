@@ -170,7 +170,7 @@ public class PayeeController {
          pst.executeUpdate();
       }
    }
-
+   
    public void partialUpdate(PayeeExt payee) throws SQLException {
       StringBuilder tmp = new StringBuilder();
       tmp.append("UPDATE emitente SET numCheques=?, ");
