@@ -366,7 +366,23 @@ public class ViewAllPayees extends javax.swing.JDialog {
     }//GEN-LAST:event_menuItemVerifyPayeeActionPerformed
 
     private void tablePayeeExtMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePayeeExtMouseReleased
-        if (SwingUtilities.isRightMouseButton(evt)) {
+      if (SwingUtilities.isRightMouseButton(evt)) {
+         Point p = evt.getPoint();
+         int rowNumber = tablePayeeExt.rowAtPoint( p );
+         if (rowNumber != -1) {
+            tablePayeeExt.setRowSelectionInterval(rowNumber, rowNumber);
+            if (evt.isPopupTrigger()) {
+               popupTableMenu.show(tablePayeeExt, evt.getX(), evt.getY());
+            }
+         }    
+      } else {
+         if (tablePayeeExt.getSelectedRow() != -1) {
+            int modelIndex = tablePayeeExt.convertRowIndexToModel(tablePayeeExt.getSelectedRow());
+            PayeeExt payee = payeeExtList.get(modelIndex);
+            //fill list with clients
+         }
+      }
+      /*if (SwingUtilities.isRightMouseButton(evt)) {
             Point p = evt.getPoint();
             int rowNumber = tablePayeeExt.rowAtPoint( p );
             if (rowNumber != -1) {
@@ -375,7 +391,7 @@ public class ViewAllPayees extends javax.swing.JDialog {
                     popupTableMenu.show(tablePayeeExt, evt.getX(), evt.getY());
                 }
             }    
-        }    
+        } */
     }//GEN-LAST:event_tablePayeeExtMouseReleased
 
     private void tablePayeeExtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePayeeExtMouseClicked

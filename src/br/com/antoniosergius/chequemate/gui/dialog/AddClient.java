@@ -546,6 +546,8 @@ public class AddClient extends javax.swing.JDialog {
         Verifier.set(textFieldState, new StateVerifier());
         Verifier.set(textFieldEmail, new EmailVerifier());
         Verifier.set(textFieldRate, new PercentVerifier());
+        Verifier.set(textFieldDistrict, new TextVerifier(50));
+        Verifier.set(textFieldCity, new TextVerifier(20));
         
         formattedTextFieldBirthDate.setFocusLostBehavior(JFormattedTextField.COMMIT);
         formattedTextFieldZipCode.setFocusLostBehavior(JFormattedTextField.COMMIT);
