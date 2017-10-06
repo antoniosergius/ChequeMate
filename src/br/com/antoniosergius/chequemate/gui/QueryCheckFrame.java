@@ -665,6 +665,7 @@ public class QueryCheckFrame extends javax.swing.JFrame {
         query = new Query();
         GregorianCalendar max = new GregorianCalendar();
         Days.setToLastMinute(max);
+        Days.setTodayToMidnight();
         query.setLowestInput(Days.TODAY);
         query.setHighestInput(max);
         datePickerLowestInput.setDate(Days.TODAY.getTime());

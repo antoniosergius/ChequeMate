@@ -1,10 +1,22 @@
 package br.com.antoniosergius.chequemate.gui.dialog;
 
+import br.com.antoniosergius.chequemate.ctrl.PayeeController;
+import br.com.antoniosergius.chequemate.obj.PayeeExt;
+import java.sql.Connection;
+
 public class ViewSignature extends javax.swing.JDialog {
 
-   public ViewSignature(java.awt.Frame parent, boolean modal) {
+   private Connection conn;
+   private PayeeController payeeControl;
+   private PayeeExt payee;
+   
+   public ViewSignature(java.awt.Frame parent, boolean modal, Connection conn, PayeeExt payee) {
       super(parent, modal);
+      this.conn = conn;
+      this.payee = payee;
+      payeeControl = new PayeeController(conn);
       initComponents();
+      setupComponents();
    }
 
    @SuppressWarnings("unchecked")
@@ -15,8 +27,6 @@ public class ViewSignature extends javax.swing.JDialog {
       header = new org.jdesktop.swingx.JXHeader();
       toolBar = new javax.swing.JToolBar();
       buttonImprimir = new org.jdesktop.swingx.JXButton();
-      jXButton2 = new org.jdesktop.swingx.JXButton();
-      jXButton3 = new org.jdesktop.swingx.JXButton();
       jSeparator1 = new javax.swing.JToolBar.Separator();
       jXButton4 = new org.jdesktop.swingx.JXButton();
       jXImageView1 = new org.jdesktop.swingx.JXImageView();
@@ -30,24 +40,17 @@ public class ViewSignature extends javax.swing.JDialog {
       buttonImprimir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
       buttonImprimir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
       toolBar.add(buttonImprimir);
-
-      jXButton2.setText("jXButton2");
-      jXButton2.setFocusable(false);
-      jXButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-      jXButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-      toolBar.add(jXButton2);
-
-      jXButton3.setText("jXButton3");
-      jXButton3.setFocusable(false);
-      jXButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-      jXButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-      toolBar.add(jXButton3);
       toolBar.add(jSeparator1);
 
-      jXButton4.setText("jXButton4");
+      jXButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/x24.exit.png"))); // NOI18N
       jXButton4.setFocusable(false);
       jXButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
       jXButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+      jXButton4.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jXButton4ActionPerformed(evt);
+         }
+      });
       toolBar.add(jXButton4);
 
       javax.swing.GroupLayout jXImageView1Layout = new javax.swing.GroupLayout(jXImageView1);
@@ -94,54 +97,22 @@ public class ViewSignature extends javax.swing.JDialog {
       pack();
    }// </editor-fold>//GEN-END:initComponents
 
-   public static void main(String args[]) {
-      /* Set the Nimbus look and feel */
-      //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-      /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-       */
-      try {
-         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-               javax.swing.UIManager.setLookAndFeel(info.getClassName());
-               break;
-            }
-         }
-      } catch (ClassNotFoundException ex) {
-         java.util.logging.Logger.getLogger(ViewSignature.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-      } catch (InstantiationException ex) {
-         java.util.logging.Logger.getLogger(ViewSignature.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-      } catch (IllegalAccessException ex) {
-         java.util.logging.Logger.getLogger(ViewSignature.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-      } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-         java.util.logging.Logger.getLogger(ViewSignature.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-      }
-      //</editor-fold>
-
-      /* Create and display the dialog */
-      java.awt.EventQueue.invokeLater(new Runnable() {
-         public void run() {
-            ViewSignature dialog = new ViewSignature(new javax.swing.JFrame(), true);
-            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-               @Override
-               public void windowClosing(java.awt.event.WindowEvent e) {
-                  System.exit(0);
-               }
-            });
-            dialog.setVisible(true);
-         }
-      });
-   }
+   private void jXButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXButton4ActionPerformed
+      dispose();
+   }//GEN-LAST:event_jXButton4ActionPerformed
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
    private org.jdesktop.swingx.JXButton buttonImprimir;
    private org.jdesktop.swingx.JXHeader header;
    private javax.swing.JToolBar.Separator jSeparator1;
-   private org.jdesktop.swingx.JXButton jXButton2;
-   private org.jdesktop.swingx.JXButton jXButton3;
    private org.jdesktop.swingx.JXButton jXButton4;
    private org.jdesktop.swingx.JXImageView jXImageView1;
    private org.jdesktop.swingx.JXPanel panelMain;
    private javax.swing.JToolBar toolBar;
    // End of variables declaration//GEN-END:variables
+
+   private void setupComponents() {
+      header.setTitle(payee.getName());
+      setLocationRelativeTo(null);
+   }
 }

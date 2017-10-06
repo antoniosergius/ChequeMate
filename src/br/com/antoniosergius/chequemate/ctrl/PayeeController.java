@@ -4,6 +4,10 @@ import br.com.antoniosergius.chequemate.obj.Check;
 import br.com.antoniosergius.chequemate.obj.Payee;
 import br.com.antoniosergius.chequemate.obj.PayeeExt;
 import br.com.antoniosergius.chequemate.util.tools.ConvertMe;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -330,6 +334,26 @@ public class PayeeController {
             }
         }
     }
-
+   public void insertImage(String registryNumber, File file) throws SQLException, FileNotFoundException, IOException {
+      String sql = "INSERT INTO emitente (assinatura) values (?) WHERE cadastro LIKE ?";
+      
+      try (PreparedStatement pst = conn.prepareStatement(sql)){
+         FileInputStream fis = new FileInputStream(file);
+         pst.setBinaryStream(1, fis, (int)file.length());
+         pst.setString(2, registryNumber);
+         pst.executeUpdate();
+      }
+   }
+   
+   public void insertImage(int id, File file) throws SQLException, FileNotFoundException {
+      String sql = "INSERT INTO emitente (assinatura) values (?) WHERE idEmitente = ?";
+      
+      try (PreparedStatement pst = conn.prepareStatement(sql)){
+         FileInputStream fis = new FileInputStream(file);
+         pst.setBinaryStream(1, fis, (int)file.length());
+         pst.setInt(2, id);
+         pst.executeUpdate();
+      }
+   }
     
 }

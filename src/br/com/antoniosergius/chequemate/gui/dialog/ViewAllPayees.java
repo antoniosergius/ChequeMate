@@ -57,7 +57,8 @@ public class ViewAllPayees extends javax.swing.JDialog {
 
       popupTableMenu = new javax.swing.JPopupMenu();
       menuItemVerifyPayee = new javax.swing.JMenuItem();
-      menuItemVerifySignature = new javax.swing.JMenuItem();
+      menuActivateScannerImage = new javax.swing.JMenuItem();
+      menuItemViewSignature = new javax.swing.JMenuItem();
       panelMain = new org.jdesktop.swingx.JXPanel();
       header = new org.jdesktop.swingx.JXHeader();
       panelForm = new org.jdesktop.swingx.JXPanel();
@@ -67,7 +68,7 @@ public class ViewAllPayees extends javax.swing.JDialog {
       textFieldRegistry = new org.jdesktop.swingx.JXTextField();
       buttonClean1 = new org.jdesktop.swingx.JXButton();
       buttonClean2 = new org.jdesktop.swingx.JXButton();
-      jXLabelImagem = new org.jdesktop.swingx.JXLabel();
+      jXLabel1 = new org.jdesktop.swingx.JXLabel();
       toolBar = new javax.swing.JToolBar();
       buttonPrint = new org.jdesktop.swingx.JXButton();
       buttonRefresh = new org.jdesktop.swingx.JXButton();
@@ -81,7 +82,6 @@ public class ViewAllPayees extends javax.swing.JDialog {
 
       menuItemVerifyPayee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/x16.view.png"))); // NOI18N
       menuItemVerifyPayee.setText("Verificar Cheques em Aberto...");
-      menuItemVerifyPayee.setToolTipText("Abre a tela de consulta de cheques com o CPF/CNPJ do emitente selecionado");
       menuItemVerifyPayee.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
             menuItemVerifyPayeeActionPerformed(evt);
@@ -89,14 +89,21 @@ public class ViewAllPayees extends javax.swing.JDialog {
       });
       popupTableMenu.add(menuItemVerifyPayee);
 
-      menuItemVerifySignature.setText("Verificar Imagem da Assinatura ...");
-      menuItemVerifySignature.setToolTipText("Mostra a imagem que contém a assinatura do emitente");
-      menuItemVerifySignature.addActionListener(new java.awt.event.ActionListener() {
+      menuActivateScannerImage.setText("Escanear Cheque para o Emitente Selecionado");
+      menuActivateScannerImage.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
-            menuItemVerifySignatureActionPerformed(evt);
+            menuActivateScannerImageActionPerformed(evt);
          }
       });
-      popupTableMenu.add(menuItemVerifySignature);
+      popupTableMenu.add(menuActivateScannerImage);
+
+      menuItemViewSignature.setText("Mostrar a Imagem da Assinatura do Emitente");
+      menuItemViewSignature.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            menuItemViewSignatureActionPerformed(evt);
+         }
+      });
+      popupTableMenu.add(menuItemViewSignature);
 
       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
       addWindowListener(new java.awt.event.WindowAdapter() {
@@ -140,8 +147,8 @@ public class ViewAllPayees extends javax.swing.JDialog {
          }
       });
 
-      jXLabelImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/x48.payee.png"))); // NOI18N
-      jXLabelImagem.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+      jXLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/x48.payee.png"))); // NOI18N
+      jXLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
       javax.swing.GroupLayout panelFormLayout = new javax.swing.GroupLayout(panelForm);
       panelForm.setLayout(panelFormLayout);
@@ -163,7 +170,7 @@ public class ViewAllPayees extends javax.swing.JDialog {
                   .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                   .addComponent(buttonClean1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 386, Short.MAX_VALUE)
-            .addComponent(jXLabelImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addContainerGap())
       );
 
@@ -186,7 +193,7 @@ public class ViewAllPayees extends javax.swing.JDialog {
                .addComponent(buttonClean1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(0, 19, Short.MAX_VALUE))
          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFormLayout.createSequentialGroup()
-            .addComponent(jXLabelImagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jXLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addContainerGap())
       );
 
@@ -271,7 +278,7 @@ public class ViewAllPayees extends javax.swing.JDialog {
          }
       });
       scrollPane.setViewportView(tablePayeeExt);
-      tablePayeeExt.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+      tablePayeeExt.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
       javax.swing.GroupLayout panelMainLayout = new javax.swing.GroupLayout(panelMain);
       panelMain.setLayout(panelMainLayout);
@@ -366,23 +373,7 @@ public class ViewAllPayees extends javax.swing.JDialog {
     }//GEN-LAST:event_menuItemVerifyPayeeActionPerformed
 
     private void tablePayeeExtMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePayeeExtMouseReleased
-      if (SwingUtilities.isRightMouseButton(evt)) {
-         Point p = evt.getPoint();
-         int rowNumber = tablePayeeExt.rowAtPoint( p );
-         if (rowNumber != -1) {
-            tablePayeeExt.setRowSelectionInterval(rowNumber, rowNumber);
-            if (evt.isPopupTrigger()) {
-               popupTableMenu.show(tablePayeeExt, evt.getX(), evt.getY());
-            }
-         }    
-      } else {
-         if (tablePayeeExt.getSelectedRow() != -1) {
-            int modelIndex = tablePayeeExt.convertRowIndexToModel(tablePayeeExt.getSelectedRow());
-            PayeeExt payee = payeeExtList.get(modelIndex);
-            //fill list with clients
-         }
-      }
-      /*if (SwingUtilities.isRightMouseButton(evt)) {
+        if (SwingUtilities.isRightMouseButton(evt)) {
             Point p = evt.getPoint();
             int rowNumber = tablePayeeExt.rowAtPoint( p );
             if (rowNumber != -1) {
@@ -391,7 +382,7 @@ public class ViewAllPayees extends javax.swing.JDialog {
                     popupTableMenu.show(tablePayeeExt, evt.getX(), evt.getY());
                 }
             }    
-        } */
+        }    
     }//GEN-LAST:event_tablePayeeExtMouseReleased
 
     private void tablePayeeExtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePayeeExtMouseClicked
@@ -402,9 +393,17 @@ public class ViewAllPayees extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tablePayeeExtMouseClicked
 
-   private void menuItemVerifySignatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerifySignatureActionPerformed
-      openSignature();
-   }//GEN-LAST:event_menuItemVerifySignatureActionPerformed
+   private void menuItemViewSignatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemViewSignatureActionPerformed
+      int modelIndex = tablePayeeExt.convertRowIndexToModel(tablePayeeExt.getSelectedRow());
+      PayeeExt payee = payeeExtList.get(modelIndex);
+      openSignature(payee);
+   }//GEN-LAST:event_menuItemViewSignatureActionPerformed
+
+   private void menuActivateScannerImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActivateScannerImageActionPerformed
+      int modelIndex = tablePayeeExt.convertRowIndexToModel(tablePayeeExt.getSelectedRow());
+      PayeeExt payee = payeeExtList.get(modelIndex);
+      morenaActivate(payee);
+   }//GEN-LAST:event_menuActivateScannerImageActionPerformed
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
    private org.jdesktop.swingx.JXButton buttonClean1;
@@ -413,13 +412,14 @@ public class ViewAllPayees extends javax.swing.JDialog {
    private org.jdesktop.swingx.JXButton buttonPrint;
    private org.jdesktop.swingx.JXButton buttonRefresh;
    private org.jdesktop.swingx.JXHeader header;
-   private org.jdesktop.swingx.JXLabel jXLabelImagem;
+   private org.jdesktop.swingx.JXLabel jXLabel1;
    private org.jdesktop.swingx.JXLabel labelName;
    private org.jdesktop.swingx.JXLabel labelRegistry;
    private org.jdesktop.swingx.JXLabel labelTotalDin;
    private org.jdesktop.swingx.JXLabel labelTotalListado;
+   private javax.swing.JMenuItem menuActivateScannerImage;
    private javax.swing.JMenuItem menuItemVerifyPayee;
-   private javax.swing.JMenuItem menuItemVerifySignature;
+   private javax.swing.JMenuItem menuItemViewSignature;
    private org.jdesktop.swingx.JXPanel panelForm;
    private org.jdesktop.swingx.JXPanel panelMain;
    private org.jdesktop.swingx.JXPanel panelResults;
@@ -557,8 +557,12 @@ public class ViewAllPayees extends javax.swing.JDialog {
         searchObj.setRegistryNumber(registryNumber);
         textFieldRegistry.setText(registryNumber);
     }
+    
+    private void openSignature(PayeeExt payee) {
+      new ViewSignature(null, true, conn, payee).setVisible(true);
+   }
 
-   private void openSignature() {
-      new ViewSignature(null, true).setVisible(true);
+   private void morenaActivate(PayeeExt payee) {
+      throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
    }
 }
