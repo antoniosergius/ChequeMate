@@ -8,6 +8,7 @@ public class Preferences implements Serializable{
     
     private boolean showSplashScreen;
     private File backupPath;
+    private File mysqlPath;
     private int daysToKeepRegistries;
     private double defaultRate;
 
@@ -45,6 +46,14 @@ public class Preferences implements Serializable{
     public void setDefaultRate(double defaultRate) {
         this.defaultRate = defaultRate;
     }
+
+   public File getMysqlPath() {
+      return mysqlPath;
+   }
+
+   public void setMysqlPath(File mysqlPath) {
+      this.mysqlPath = mysqlPath;
+   }
 
     @Override
     public String toString() {

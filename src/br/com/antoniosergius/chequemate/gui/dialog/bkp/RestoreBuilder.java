@@ -3,7 +3,7 @@ package br.com.antoniosergius.chequemate.gui.dialog.bkp;
 import br.com.antoniosergius.chequemate.gui.MainFrame;
 import br.com.antoniosergius.chequemate.util.ChequeMate;
 import br.com.antoniosergius.lib.util.MySQLParameters;
-import br.com.antoniosergius.lib.util.io.BackupService;
+import br.com.antoniosergius.chequemate.util.io.BackupService;
 import java.awt.Cursor;
 import java.io.File;
 import java.io.IOException;
