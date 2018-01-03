@@ -626,10 +626,14 @@ public class AlterCheck extends javax.swing.JDialog {
         datePickerExpiration.setEditable(false);
         JXMonthView monthView = datePickerExpiration.getMonthView();
         GregorianCalendar date = new GregorianCalendar();
-        date.roll(GregorianCalendar.DAY_OF_YEAR, -ChequeMate.getParameters().getMinExpirationDays());
+        int checkDeletion = ChequeMate.getParameters().getMinExpirationDays();
+        date.roll(GregorianCalendar.DAY_OF_YEAR, -checkDeletion);
+        GregorianCalendar expiration = new GregorianCalendar();
+        expiration.set(GregorianCalendar.DAY_OF_MONTH, checkDeletion+1);
+        if (Days.TODAY.before(expiration))
+           date.add(GregorianCalendar.YEAR, -1);
         monthView.setLowerBound(date.getTime());
         monthView.setEnabled(true);
-        
         monthView.setFlaggedDates(ChequeMate.getHolidayControl().getArrayDate());
         monthView.setFlaggedDayForeground(Color.red);
         
