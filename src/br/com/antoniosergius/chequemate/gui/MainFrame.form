@@ -509,10 +509,10 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/img/x32.search.png"/>
             </Property>
-            <Property name="maxLineSpan" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Consulta"/>
             <Property name="verticalAlignment" type="int" value="1"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="maxLineSpan" type="int" value="0"/>
             <Property name="textAlignment" type="org.jdesktop.swingx.JXLabel$TextAlignment" editor="org.netbeans.modules.form.editors.EnumEditor">
               <Value id="CENTER"/>
             </Property>

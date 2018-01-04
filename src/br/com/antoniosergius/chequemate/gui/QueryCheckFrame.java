@@ -834,16 +834,18 @@ public class QueryCheckFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemRemoveActionPerformed
 
     private void buttonPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPrintActionPerformed
-        setCursor(new Cursor(Cursor.WAIT_CURSOR));
-        try {
-            Sort.byExpiration(checkList);
-        } catch (ChequeMateException ex) {}
-        try {
-            ReportFactory.viewQuery(checkList);
-        } catch (SQLException | JRException | IOException ex) {
-            LOG.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      setCursor(new Cursor(Cursor.WAIT_CURSOR));
+      try {
+          Sort.byExpiration(checkList);
+      } catch (ChequeMateException ex) {
+         LOG.log(Level.SEVERE, ex.getMessage(), ex);
+      }
+      try {
+          ReportFactory.viewQuery(checkList);
+      } catch (SQLException | JRException | IOException ex) {
+          LOG.log(Level.SEVERE, ex.getMessage(), ex);
+      }
+      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_buttonPrintActionPerformed
 
     private void menuItemVerifyPayeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerifyPayeeActionPerformed

@@ -925,37 +925,53 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-      LoginSystem loginDialog = new LoginSystem(this, true);
-      loginDialog.setLocationRelativeTo(this);
-      loginDialog.setVisible(true);
+      SwingUtilities.invokeLater(() -> {
+         LoginSystem loginDialog = new LoginSystem(this, true);
+         loginDialog.setLocationRelativeTo(this);
+         loginDialog.setVisible(true);
+      });
     }//GEN-LAST:event_formWindowOpened
 
     private void menuItemRecordCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRecordCheckActionPerformed
-      openRecordCheck();
+      SwingUtilities.invokeLater(() -> {
+         openRecordCheck();
+      });
     }//GEN-LAST:event_menuItemRecordCheckActionPerformed
 
     private void menuItemCheckByClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCheckByClientActionPerformed
-      new ReportByClient(this, false, conn, "Relação de Cheques por Cliente:").setVisible(true);
+      SwingUtilities.invokeLater(() -> {
+         new ReportByClient(this, false, conn, "Relação de Cheques por Cliente:").setVisible(true);
+      });
     }//GEN-LAST:event_menuItemCheckByClientActionPerformed
 
     private void menuItemQueryInputAndClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemQueryInputAndClientActionPerformed
-      new ReportByClientAndInputDate(this, false, conn).setVisible(true);
+      SwingUtilities.invokeLater(() -> {
+         new ReportByClientAndInputDate(this, false, conn).setVisible(true);
+      });
     }//GEN-LAST:event_menuItemQueryInputAndClientActionPerformed
 
     private void menuItemInputRangeAndClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemInputRangeAndClientActionPerformed
-      new ReportByClientAndInputRange(this, false, conn).setVisible(true);
+      SwingUtilities.invokeLater(() -> {
+         new ReportByClientAndInputRange(this, false, conn).setVisible(true);
+      });
     }//GEN-LAST:event_menuItemInputRangeAndClientActionPerformed
 
     private void menuItemOpenClientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemOpenClientsActionPerformed
-      openClients();
+      SwingUtilities.invokeLater(() -> {
+         openClients();
+      });
     }//GEN-LAST:event_menuItemOpenClientsActionPerformed
 
     private void menuItemSetDataBaseParamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSetDataBaseParamActionPerformed
-      new AlterMySQLParameter(this, false).setVisible(true);
+      SwingUtilities.invokeLater(() -> {
+         new AlterMySQLParameter(this, false).setVisible(true);
+      });
     }//GEN-LAST:event_menuItemSetDataBaseParamActionPerformed
 
     private void menuItemChangeLAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemChangeLAFActionPerformed
-      new AlterLookAndFeel(this, true).setVisible(true);
+      SwingUtilities.invokeLater(() -> {
+         new AlterLookAndFeel(this, true).setVisible(true);
+      });
     }//GEN-LAST:event_menuItemChangeLAFActionPerformed
 
     private void menuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemExitActionPerformed
@@ -963,11 +979,15 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemExitActionPerformed
 
     private void menuItemOpenChecksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemOpenChecksActionPerformed
-      openSearch();
+      SwingUtilities.invokeLater(() -> {
+         openSearch();
+      });
     }//GEN-LAST:event_menuItemOpenChecksActionPerformed
 
     private void buttonConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConsultasActionPerformed
-      openSearch();
+      SwingUtilities.invokeLater(() -> {
+         openSearch();
+      });
     }//GEN-LAST:event_buttonConsultasActionPerformed
 
     private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
@@ -975,19 +995,27 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonSairActionPerformed
 
     private void buttonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarActionPerformed
-      openRecordCheck();
+      SwingUtilities.invokeLater(() -> {
+         openRecordCheck();
+      });
     }//GEN-LAST:event_buttonCadastrarActionPerformed
 
     private void buttonClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClientesActionPerformed
-      openClients();
+      SwingUtilities.invokeLater(() -> {
+         openClients();
+      });
     }//GEN-LAST:event_buttonClientesActionPerformed
 
     private void monthViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthViewActionPerformed
-      selectDate();
+      SwingUtilities.invokeLater(() -> {
+         selectDate();
+      });
     }//GEN-LAST:event_monthViewActionPerformed
 
     private void menuItemParametersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemParametersActionPerformed
-      new AlterParameters(this, true, conn).setVisible(true);
+      SwingUtilities.invokeLater(() -> {
+         new AlterParameters(this, true, conn).setVisible(true);
+      });
     }//GEN-LAST:event_menuItemParametersActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -995,7 +1023,9 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void menuItemHolidaysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemHolidaysActionPerformed
-      new ViewAllHolidays(this, false).setVisible(true);
+      SwingUtilities.invokeLater(() -> {
+         new ViewAllHolidays(this, false).setVisible(true);
+      }); 
     }//GEN-LAST:event_menuItemHolidaysActionPerformed
 
     private void labelConsultarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelConsultarMouseEntered
@@ -1023,115 +1053,170 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_labelCadastrarMouseExited
 
     private void menuItemAddClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAddClientActionPerformed
-      new AddClient(this, false, conn, null).setVisible(true);
+      SwingUtilities.invokeLater(() -> {
+         new AddClient(this, false, conn, null).setVisible(true);
+      });
     }//GEN-LAST:event_menuItemAddClientActionPerformed
 
     private void buttonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRefreshActionPerformed
-      updateSystemInfo();
+      SwingUtilities.invokeLater(() -> {
+         updateSystemInfo();
+      });
     }//GEN-LAST:event_buttonRefreshActionPerformed
 
     private void menuItemBackupCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemBackupCreateActionPerformed
-      openBackup();
+      SwingUtilities.invokeLater(() -> {
+         openBackup();
+      });
     }//GEN-LAST:event_menuItemBackupCreateActionPerformed
 
     private void menuItemBackupRestoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemBackupRestoreActionPerformed
-      new RestoreBuilder(this, true).setVisible(true);
+      SwingUtilities.invokeLater(() -> {
+         new RestoreBuilder(this, true).setVisible(true);
+      });
     }//GEN-LAST:event_menuItemBackupRestoreActionPerformed
 
     private void menuItemSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSobreActionPerformed
-      new About(this, true).setVisible(true);
+      SwingUtilities.invokeLater(() -> {
+         new LoanSimulator(this, true).setVisible(true);
+      });
     }//GEN-LAST:event_menuItemSobreActionPerformed
 
     private void menuItemSimuladorEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSimuladorEmprestimoActionPerformed
-      new LoanSimulator(this, true).setVisible(true);
+      SwingUtilities.invokeLater(() -> {
+         new LoanSimulator(this, true).setVisible(true);
+      });
     }//GEN-LAST:event_menuItemSimuladorEmprestimoActionPerformed
 
     private void menuItemCalcularDescontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCalcularDescontoActionPerformed
-      new CheckCashing(this, false).setVisible(true);
+      SwingUtilities.invokeLater(() -> {
+         new CheckCashing(this, false).setVisible(true);
+      });
     }//GEN-LAST:event_menuItemCalcularDescontoActionPerformed
 
     private void labelCalcularDescontoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCalcularDescontoMouseEntered
-      setCursor(new Cursor(Cursor.HAND_CURSOR));
+      SwingUtilities.invokeLater(() -> {
+         setCursor(new Cursor(Cursor.HAND_CURSOR));
+      });
     }//GEN-LAST:event_labelCalcularDescontoMouseEntered
 
     private void labelCalcularDescontoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCalcularDescontoMouseExited
-      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      SwingUtilities.invokeLater(() -> {
+         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      });
     }//GEN-LAST:event_labelCalcularDescontoMouseExited
 
     private void labelSimularEmprestimoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSimularEmprestimoMouseEntered
-      setCursor(new Cursor(Cursor.HAND_CURSOR));
+      SwingUtilities.invokeLater(() -> {
+         setCursor(new Cursor(Cursor.HAND_CURSOR));
+      });
     }//GEN-LAST:event_labelSimularEmprestimoMouseEntered
 
     private void labelSimularEmprestimoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSimularEmprestimoMouseExited
-      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      SwingUtilities.invokeLater(() -> {
+         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      });       
     }//GEN-LAST:event_labelSimularEmprestimoMouseExited
 
     private void menuItemPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemPreferencesActionPerformed
-      new AlterPreferences(this, true).setVisible(true);
+      SwingUtilities.invokeLater(() -> {
+         new AlterPreferences(this, true).setVisible(true);
+      });  
     }//GEN-LAST:event_menuItemPreferencesActionPerformed
 
     private void menuItemEmitentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemEmitentesActionPerformed
-      openPayees();
+      SwingUtilities.invokeLater(() -> {
+         openPayees();
+      });
     }//GEN-LAST:event_menuItemEmitentesActionPerformed
 
     private void labelEmitentesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelEmitentesMouseEntered
-      setCursor(new Cursor(Cursor.HAND_CURSOR));
+      SwingUtilities.invokeLater(() -> {
+         setCursor(new Cursor(Cursor.HAND_CURSOR));
+      });
     }//GEN-LAST:event_labelEmitentesMouseEntered
 
     private void labelEmitentesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelEmitentesMouseExited
-      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      SwingUtilities.invokeLater(() -> {
+         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      });
     }//GEN-LAST:event_labelEmitentesMouseExited
 
     private void labelEmitentesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelEmitentesMousePressed
-      openPayees();
+      SwingUtilities.invokeLater(() -> {
+         openPayees();
+      });
     }//GEN-LAST:event_labelEmitentesMousePressed
 
     private void labelClientesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelClientesMousePressed
-      openClients();
+      SwingUtilities.invokeLater(() -> {
+         openClients();
+      });
     }//GEN-LAST:event_labelClientesMousePressed
-
     private void labelConsultarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelConsultarMousePressed
-      openSearch();
+      SwingUtilities.invokeLater(() -> {
+         openSearch();
+      });
     }//GEN-LAST:event_labelConsultarMousePressed
 
     private void labelCadastrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCadastrarMousePressed
-      openRecordCheck();
+      SwingUtilities.invokeLater(() -> {
+         openRecordCheck();
+      });
     }//GEN-LAST:event_labelCadastrarMousePressed
 
     private void labelSimularEmprestimoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSimularEmprestimoMousePressed
-      new LoanSimulator(this, true).setVisible(true);
+      SwingUtilities.invokeLater(() -> {
+         new LoanSimulator(this, true).setVisible(true);
+      });
     }//GEN-LAST:event_labelSimularEmprestimoMousePressed
 
     private void labelCalcularDescontoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCalcularDescontoMousePressed
-      new CheckCashing(this, false).setVisible(true);
+      SwingUtilities.invokeLater(() -> {
+         new CheckCashing(this, false).setVisible(true);
+      });
     }//GEN-LAST:event_labelCalcularDescontoMousePressed
 
     private void menuItemVisualizarRetencoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVisualizarRetencoesActionPerformed
-      openRetentions();
+      SwingUtilities.invokeLater(() -> {
+         openRetentions();
+      });
     }//GEN-LAST:event_menuItemVisualizarRetencoesActionPerformed
 
     private void menuItemBetweenDatesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemBetweenDatesActionPerformed
-      new BetweenDates(this, true).setVisible(true);
+      SwingUtilities.invokeLater(() -> {
+         new BetweenDates(this, true).setVisible(true);
+      });
     }//GEN-LAST:event_menuItemBetweenDatesActionPerformed
 
     private void menuItemConsultaExtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemConsultaExtActionPerformed
-       openExtendedSearch();
+      SwingUtilities.invokeLater(() -> {
+         openExtendedSearch();
+      });
     }//GEN-LAST:event_menuItemConsultaExtActionPerformed
 
     private void labelConsultaExtendidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelConsultaExtendidaMouseEntered
-      setCursor(new Cursor(Cursor.HAND_CURSOR));
+      SwingUtilities.invokeLater(() -> {
+         setCursor(new Cursor(Cursor.HAND_CURSOR));
+      });
     }//GEN-LAST:event_labelConsultaExtendidaMouseEntered
 
     private void labelConsultaExtendidaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelConsultaExtendidaMouseExited
-      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      SwingUtilities.invokeLater(() -> {
+         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      });
     }//GEN-LAST:event_labelConsultaExtendidaMouseExited
 
     private void labelConsultaExtendidaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelConsultaExtendidaMousePressed
-      openExtendedSearch();
+      SwingUtilities.invokeLater(() -> {
+         openExtendedSearch();
+      });
     }//GEN-LAST:event_labelConsultaExtendidaMousePressed
 
     private void menuChequesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuChequesActionPerformed
-      openRecordCheck();
+      SwingUtilities.invokeLater(() -> {
+         openRecordCheck();
+      });
     }//GEN-LAST:event_menuChequesActionPerformed
 
    public static void init() {
@@ -1320,17 +1405,14 @@ public class MainFrame extends javax.swing.JFrame {
    }
 
    private void openBackup() {
-      SwingUtilities.invokeLater(new Runnable() {
-         @Override
-         public void run() {
-            try {
-               if (hasClient()) {
-                  new BackupBuilder(mainFrame, true).setVisible(true);
-               }
-            } catch (SQLException ex) {
-               sqlExceptionMessage(ex.getMessage());
-               LOG.log(Level.SEVERE, null, ex);
+      SwingUtilities.invokeLater(() -> {
+         try {
+            if (hasClient()) {
+               new BackupBuilder(mainFrame, true).setVisible(true);
             }
+         } catch (SQLException ex) {
+            sqlExceptionMessage(ex.getMessage());
+            LOG.log(Level.SEVERE, null, ex);
          }
       });
    }
