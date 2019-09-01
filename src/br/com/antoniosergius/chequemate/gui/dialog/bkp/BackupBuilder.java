@@ -25,7 +25,7 @@ public class BackupBuilder extends javax.swing.JDialog {
         backupMySQL.setDateTime(new GregorianCalendar());
         setupComponents();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

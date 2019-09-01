@@ -1078,7 +1078,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void menuItemSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSobreActionPerformed
       SwingUtilities.invokeLater(() -> {
-         new LoanSimulator(this, true).setVisible(true);
+         new About(this, true).setVisible(true);
       });
     }//GEN-LAST:event_menuItemSobreActionPerformed
 
@@ -1374,6 +1374,7 @@ public class MainFrame extends javax.swing.JFrame {
 
    private void quitApp() {
       try {
+         ChequeMate.createDailyBackup();
          ChequeMate.disconnectDB(conn);
       } catch (SQLException ex) {
          LOG.log(Level.SEVERE, ex.getMessage(), ex);

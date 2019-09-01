@@ -63,7 +63,7 @@ public class About extends javax.swing.JDialog {
 
         labelEmailDyn.setText("antoniosergio@mail.com");
 
-        labelTelefonesDyn.setText("(37) 8809-1457");
+        labelTelefonesDyn.setText("(37) 99149-2877");
 
         labelImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/x64.java.png"))); // NOI18N
         labelImagem.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -76,7 +76,7 @@ public class About extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(panelDesenvolvedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(labelEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelTelefones, javax.swing.GroupLayout.PREFERRED_SIZE, 59, Short.MAX_VALUE)
+                    .addComponent(labelTelefones, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
                     .addComponent(labelNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDesenvolvedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)

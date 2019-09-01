@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.gjt.mm.mysql.Driver;
+import com.mysql.cj.jdbc.Driver;
 import org.pushingpixels.substance.api.SubstanceLookAndFeel;
 
 public class ChequeMate {
@@ -42,7 +42,7 @@ public class ChequeMate {
     public static final Locale LOCALE = new Locale("pt", "BR");
     public static final XMLStream XSTREAM = new XMLStream();
     private static final HolidayController holidayControl = new HolidayController();
-    public static String VERSION = "1.6"; 
+    public static String VERSION = "1.7"; 
     
     public static Connection init(MySQLParameters mysqlParam, char[] password) throws SQLException, IOException, InterruptedException {
         Connection conn = testDB(mysqlParam, password);
@@ -93,16 +93,18 @@ public class ChequeMate {
         url.append(parameters.getServer());
         url.append(":");
         url.append(parameters.getPort());
-        //url.append("/");
-        //url.append(parameters.getDatabase());
+        url.append("/");
+        url.append(parameters.getDatabase());
         Properties prop = new Properties();
         prop.put("user", parameters.getUser());
         prop.put("password", String.valueOf(password));
-        prop.put("connectTimeout", "1");
-        prop.put("autoReconnect", "true");
-        prop.put("cachePrepStmts", "true");
-        prop.put("maxReconnects", "3");
-        prop.put("paranoid", "true");
+        prop.put("useTimezone", "true");
+        prop.put("serverTimezone", "UTC");
+//        prop.put("connectTimeout", "1");
+//        prop.put("autoReconnect", "true");
+//        prop.put("cachePrepStmts", "true");
+//        prop.put("maxReconnects", "3");
+//        prop.put("paranoid", "true");
         DriverManager.registerDriver(new Driver());
         return DriverManager.getConnection(url.toString(), prop);
     }
@@ -118,11 +120,13 @@ public class ChequeMate {
         Properties prop = new Properties();
         prop.put("user", parameters.getUser());
         prop.put("password", String.valueOf(password));
-        prop.put("connectTimeout", "1");
-        prop.put("autoReconnect", "true");
-        prop.put("cachePrepStmts", "true");
-        prop.put("maxReconnects", "3");
-        prop.put("paranoid", "true");
+        prop.put("useTimezone", "true");
+        prop.put("serverTimezone", "UTC");
+//        prop.put("connectTimeout", "1");
+//        prop.put("autoReconnect", "true");
+//        prop.put("cachePrepStmts", "true");
+//        prop.put("maxReconnects", "3");
+//        prop.put("paranoid", "true");
         DriverManager.registerDriver(new Driver());
         return DriverManager.getConnection(url.toString(), prop);
     }
@@ -133,14 +137,15 @@ public class ChequeMate {
 
     private static void applyWindowsLAF() {
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                } else {
-                    javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-                }
-            }
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Windows".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                } else {
+//                    javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+//                }
+//            }
+            javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ChequeMate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
@@ -257,6 +262,38 @@ public class ChequeMate {
         }
         
         
+    }
+
+    public static void createDailyBackup() {
+        BackupService backupMySQL = ChequeMate.getBackupService();
+        backupMySQL.setDateTime(new GregorianCalendar());
+        String fileName = backupMySQL.createFileName();
+        File file = new File(ChequeMate.getPreferences().getBackupPath()+File.separator+fileName);
+        
+        if (file.exists()) {
+            if (file.canWrite()) {
+                executeBackup(file, true, backupMySQL);
+            } 
+        } else {
+            executeBackup(file, false, backupMySQL);
+        }
+        //new BackupBuilder(null, true).setVisible(true);
+    }
+    
+    private static void executeBackup(File saveFile, boolean exists, BackupService backupMySQL) {
+        try {
+            if (!exists) {
+                saveFile.createNewFile();
+            } 
+            backupMySQL.setFile(saveFile);
+            if (backupMySQL.commitBackup()) {
+                ChequeMate.showSuccessMessage(null, "Backup efetuado com sucesso.");
+            } else {
+                ChequeMate.showErrorMessage(null, "Houve algum erro ao gravar o arquivo.");
+            }
+        } catch (InterruptedException | IOException ex) {
+            ChequeMate.showErrorMessage(null, "Não foi possível gerar o Backup para o respectivo diretório.");
+        }
     }
 
     public static class ApplySubstanceLAF implements Runnable {
