@@ -828,12 +828,7 @@ public class RegisterCheckFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemVerifyPayeeActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                exitForm();
-            }
-        });
+        SwingUtilities.invokeLater(this::exitForm);
     }//GEN-LAST:event_formWindowClosing
 
     private void comboBoxPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_comboBoxPopupMenuWillBecomeInvisible

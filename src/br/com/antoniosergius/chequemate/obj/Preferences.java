@@ -10,6 +10,7 @@ public class Preferences implements Serializable{
     private File backupPath;
     private File mysqlPath;
     private int daysToKeepRegistries;
+    private int daysToKeepRetention;
     private double defaultRate;
 
     public Preferences() {
@@ -54,6 +55,14 @@ public class Preferences implements Serializable{
    public void setMysqlPath(File mysqlPath) {
       this.mysqlPath = mysqlPath;
    }
+
+    public int getDaysToKeepRetention() {
+        return daysToKeepRetention;
+    }
+
+    public void setDaysToKeepRetention(int daysToKeepRetention) {
+        this.daysToKeepRetention = daysToKeepRetention;
+    }
 
     @Override
     public String toString() {

@@ -54,14 +54,14 @@ public class ReportFactory {
     public static void viewQuery(ArrayList<Check> checkList) throws SQLException, JRException, IOException {
         ReportFactory.show(MyPath.REPORTS+"ConsultasDataSource.jasper", 
                 "ConsultasDataSource.jrprint", 
-                new HashMap<String, Object>(),
+                new HashMap<>(),
                 new QueryDataSource(checkList));
     }
     
     public static void viewCashing(ArrayList<Cashing> list) throws SQLException, JRException, IOException {
         ReportFactory.show(MyPath.REPORTS+"DescontoDataSource.jasper", 
                 "DescontoDataSource.jrprint", 
-                new HashMap<String, Object>(),
+                new HashMap<>(),
                 new CashingDataSource(list));
     }
   
@@ -70,7 +70,7 @@ public class ReportFactory {
             throw new SQLException("Cliente não possui nenhum cheque cadastrado.");
         }
         HashMap<String, Object> param = new HashMap<>();
-        param.put("CodigoCliente", new Integer(idClient));
+        param.put("CodigoCliente", idClient);
         show(jasperFile, "ChequesPorCliente.jrprint", param);
         
     }
@@ -80,7 +80,7 @@ public class ReportFactory {
             throw new SQLException("Cliente não possui cheque(s) cadastrado(s) na data especificada.");
         }
         HashMap<String, Object> param = new HashMap<>();
-        param.put("CodigoCliente", new Integer(idClient));
+        param.put("CodigoCliente", idClient);
         param.put("DataEntrada", date.getTime());
         show(jasperFile, "ChequesDataEntradaCliente.jrprint", param);
     }
@@ -91,7 +91,7 @@ public class ReportFactory {
             throw new SQLException("Cliente não possui cheque(s) cadastrado(s) no intervalo correspondente.");
         }
         HashMap<String, Object> param = new HashMap<>();
-        param.put("CodigoCliente", new Integer(idClient));
+        param.put("CodigoCliente", idClient);
         param.put("DataInicio", begin.getTime());
         param.put("DataFim", end.getTime());
         show(jasperFile, "ChequesIntervaloDataEntradaCliente.jrprint", param);

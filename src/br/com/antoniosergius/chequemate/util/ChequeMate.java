@@ -10,6 +10,7 @@ import br.com.antoniosergius.lib.gui.utils.ShowSuccesMessage;
 import br.com.antoniosergius.lib.obj.Message;
 import br.com.antoniosergius.lib.util.MySQLParameters;
 import br.com.antoniosergius.chequemate.util.io.BackupService;
+import br.com.antoniosergius.lib.tools.Days;
 import br.com.antoniosergius.lib.util.io.Configuration;
 import br.com.antoniosergius.lib.util.io.Serialize;
 import br.com.antoniosergius.lib.util.io.XMLStream;
@@ -25,8 +26,6 @@ import java.sql.SQLException;
 import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-//import org.apache.log4j.Level;
-//import org.apache.log4j.Logger;
 import com.mysql.cj.jdbc.Driver;
 import org.pushingpixels.substance.api.SubstanceLookAndFeel;
 
@@ -39,9 +38,9 @@ public class ChequeMate {
     private static BackupService backupService;
     private static Preferences preferences;
     private static char[] mysqlPassword;
+    private static final HolidayController HOLIDAY_CONTROL = new HolidayController();
     public static final Locale LOCALE = new Locale("pt", "BR");
     public static final XMLStream XSTREAM = new XMLStream();
-    private static final HolidayController HOLIDAY_CONTROL = new HolidayController();
     public static final String VERSION = "2.0"; 
     
     public static Connection init(MySQLParameters mysqlParam, char[] password) throws SQLException, IOException, InterruptedException {
@@ -56,7 +55,6 @@ public class ChequeMate {
         GregorianCalendar max = new GregorianCalendar();
         max.roll(GregorianCalendar.YEAR, 8);
         ChequeMate.maxDate = max; 
-//        Logger.getRootLogger().setLevel(Level.WARN);
         return conn;
     }
     
@@ -70,6 +68,7 @@ public class ChequeMate {
             preferences.setShowSplashScreen(true);
             preferences.setDefaultRate(5.0);
             preferences.setDaysToKeepRegistries(180);
+            preferences.setDaysToKeepRetention(60);
         }
     }
     
@@ -100,11 +99,6 @@ public class ChequeMate {
         prop.put("password", String.valueOf(password));
         prop.put("useTimezone", "true");
         prop.put("serverTimezone", "UTC");
-//        prop.put("connectTimeout", "1");
-//        prop.put("autoReconnect", "true");
-//        prop.put("cachePrepStmts", "true");
-//        prop.put("maxReconnects", "3");
-//        prop.put("paranoid", "true");
         DriverManager.registerDriver(new Driver());
         return DriverManager.getConnection(url.toString(), prop);
     }
@@ -122,11 +116,6 @@ public class ChequeMate {
         prop.put("password", String.valueOf(password));
         prop.put("useTimezone", "true");
         prop.put("serverTimezone", "UTC");
-//        prop.put("connectTimeout", "1");
-//        prop.put("autoReconnect", "true");
-//        prop.put("cachePrepStmts", "true");
-//        prop.put("maxReconnects", "3");
-//        prop.put("paranoid", "true");
         DriverManager.registerDriver(new Driver());
         return DriverManager.getConnection(url.toString(), prop);
     }
@@ -137,14 +126,6 @@ public class ChequeMate {
 
     private static void applyWindowsLAF() {
         try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Windows".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                } else {
-//                    javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-//                }
-//            }
             javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ChequeMate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -231,6 +212,20 @@ public class ChequeMate {
         File data = new File(MyPath.DATA);
         if (!registries.exists()) {
             registries.mkdir();
+        } else {
+            //verificar se o arquivo tem mais de um mes 
+            for (File file : registries.listFiles()) {
+                //System.out.println(file.getName().split("-")[1].split("~")[0]);
+                String[] date = file.getName().split("-")[1].split("~")[0].split("\\.");
+                GregorianCalendar fileDate = new GregorianCalendar(
+                        Integer.parseInt(date[2]), 
+                        Integer.parseInt(date[1])-1, 
+                        Integer.parseInt(date[0])
+                );
+                if (Days.between(fileDate, Days.TODAY) > ChequeMate.preferences.getDaysToKeepRetention()) {
+                    file.delete();
+                }
+            }
         }
         if (!data.exists()) {
             data.mkdir();
@@ -277,7 +272,6 @@ public class ChequeMate {
         } else {
             executeBackup(file, false, backupMySQL);
         }
-        //new BackupBuilder(null, true).setVisible(true);
     }
     
     private static void executeBackup(File saveFile, boolean exists, BackupService backupMySQL) {
@@ -297,7 +291,7 @@ public class ChequeMate {
     }
 
     public static class ApplySubstanceLAF implements Runnable {
-        private String clazz;
+        private final String clazz;
         public ApplySubstanceLAF(String clazz) {
             this.clazz = clazz;
         }
