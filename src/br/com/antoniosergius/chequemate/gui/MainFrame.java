@@ -219,9 +219,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
         toolBar.add(buttonSair);
 
-        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder1 = new org.jdesktop.swingx.border.DropShadowBorder();
-        monthView.setBorder(dropShadowBorder1);
         monthView.setForeground(new java.awt.Color(51, 51, 51));
+        org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder1 = new org.jdesktop.swingx.border.DropShadowBorder();
+        dropShadowBorder1.setShowLeftShadow(true);
+        dropShadowBorder1.setShowTopShadow(true);
+        monthView.setBorder(dropShadowBorder1);
         monthView.setBoxPaddingX(2);
         monthView.setBoxPaddingY(1);
         monthView.setDaysOfTheWeekForeground(new java.awt.Color(255, 102, 0));
@@ -239,10 +241,10 @@ public class MainFrame extends javax.swing.JFrame {
 
         labelConsultar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/x32.search.png"))); // NOI18N
+        labelConsultar.setMaxLineSpan(0);
         labelConsultar.setText("Consulta");
         labelConsultar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         labelConsultar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        labelConsultar.setMaxLineSpan(0);
         labelConsultar.setTextAlignment(org.jdesktop.swingx.JXLabel.TextAlignment.CENTER);
         labelConsultar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         labelConsultar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -476,8 +478,8 @@ public class MainFrame extends javax.swing.JFrame {
         labelMonthAmountLeft.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelMonthAmountLeft.setText(" ");
 
-        javax.swing.GroupLayout taskPaneLayout = new javax.swing.GroupLayout(taskPane);
-        taskPane.setLayout(taskPaneLayout);
+        javax.swing.GroupLayout taskPaneLayout = new javax.swing.GroupLayout(taskPane.getContentPane());
+        taskPane.getContentPane().setLayout(taskPaneLayout);
         taskPaneLayout.setHorizontalGroup(
             taskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(taskPaneLayout.createSequentialGroup()
@@ -1372,7 +1374,6 @@ public class MainFrame extends javax.swing.JFrame {
 
    private void quitApp() {
       try {
-         ChequeMate.createDailyBackup();
          ChequeMate.disconnectDB(conn);
       } catch (SQLException ex) {
          LOG.log(Level.SEVERE, ex.getMessage(), ex);
