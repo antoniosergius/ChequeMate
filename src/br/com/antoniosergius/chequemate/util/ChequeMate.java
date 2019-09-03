@@ -25,8 +25,8 @@ import java.sql.SQLException;
 import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Level;
+//import org.apache.log4j.Logger;
 import com.mysql.cj.jdbc.Driver;
 import org.pushingpixels.substance.api.SubstanceLookAndFeel;
 
@@ -56,7 +56,7 @@ public class ChequeMate {
         GregorianCalendar max = new GregorianCalendar();
         max.roll(GregorianCalendar.YEAR, 8);
         ChequeMate.maxDate = max; 
-        Logger.getRootLogger().setLevel(Level.WARN);
+//        Logger.getRootLogger().setLevel(Level.WARN);
         return conn;
     }
     
