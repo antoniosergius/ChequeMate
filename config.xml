@@ -1,4 +1,4 @@
 <system>
   <mysqlParameters server="localhost" port="3306" database="chequemate" user="sergio" encryptedPassword="r7KDhB94urrm6rrsgkCqRNUTuPk="/>
-  <lookAndFeel className="org.pushingpixels.substance.api.skin.CremeCoffeeSkin"/>
+  <lookAndFeel className="Windows"/>
 </system>

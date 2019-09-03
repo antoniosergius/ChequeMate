@@ -41,18 +41,18 @@ public class ChequeMate {
     private static char[] mysqlPassword;
     public static final Locale LOCALE = new Locale("pt", "BR");
     public static final XMLStream XSTREAM = new XMLStream();
-    private static final HolidayController holidayControl = new HolidayController();
-    public static String VERSION = "1.7"; 
+    private static final HolidayController HOLIDAY_CONTROL = new HolidayController();
+    public static final String VERSION = "2.0"; 
     
     public static Connection init(MySQLParameters mysqlParam, char[] password) throws SQLException, IOException, InterruptedException {
         Connection conn = testDB(mysqlParam, password);
         verifyDataBase(conn);
         conn = registerDB(mysqlParam, password);
-        ChequeMate.holidayControl.createInstances(conn);
+        ChequeMate.HOLIDAY_CONTROL.createInstances(conn);
         ChequeMate.backupService = new BackupService(mysqlParam, password);
         ChequeMate.parameters = new ParameterController(conn).get();
-        ChequeMate.minInputDate = holidayControl.getMinInputDate();
-        ChequeMate.minExpirationDate = holidayControl.getMinExpirationDate();
+        ChequeMate.minInputDate = HOLIDAY_CONTROL.getMinInputDate();
+        ChequeMate.minExpirationDate = HOLIDAY_CONTROL.getMinExpirationDate();
         GregorianCalendar max = new GregorianCalendar();
         max.roll(GregorianCalendar.YEAR, 8);
         ChequeMate.maxDate = max; 
@@ -192,7 +192,7 @@ public class ChequeMate {
     }
 
     public static HolidayController getHolidayControl() {
-        return holidayControl;
+        return HOLIDAY_CONTROL;
     }
 
     public static GregorianCalendar getMinExpirationDate() {
