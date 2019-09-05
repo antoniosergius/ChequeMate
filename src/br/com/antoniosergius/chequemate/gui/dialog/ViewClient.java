@@ -481,7 +481,6 @@ public class ViewClient extends javax.swing.JDialog {
                     "Cancelar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (choice == JOptionPane.YES_OPTION) {
                 cancel();
-                revert(false);
             } 
         } else {
             cancel();
