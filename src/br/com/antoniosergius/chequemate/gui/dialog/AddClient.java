@@ -477,13 +477,13 @@ public class AddClient extends javax.swing.JDialog {
         textFieldId.setText("");
         textFieldEmail.setText("");
         formattedTextFieldZipCode.setValue(null);
-        textFieldRate.setText("");
+        textFieldRate.setText("5,00");
         formattedTextFieldBirthDate.setValue(null);
     }
     
     private Client getClientFromForm() throws ChequeMateException {
         if (isEmpty()) {
-            throw new ChequeMateException("Todos os campos estão vazios.", textFieldName);
+            throw new ChequeMateException("Favor preencher nome, CPF/CNPJ e telefone.", textFieldName);
         }
         String name = textFieldName.getText().toUpperCase();
         String registryNumber = Deformat.CPForCNPJ(textFieldRegistry.getText());
@@ -518,20 +518,11 @@ public class AddClient extends javax.swing.JDialog {
     }
     
     private boolean isEmpty() {
-        return (textFieldName.getText().isEmpty() &&
-                textFieldDistrict.getText().isEmpty() &&
-                textFieldStreet.getText().isEmpty() &&
-                textFieldCity.getText().isEmpty() &&
-                textFieldState.getText().isEmpty() &&
-                textFieldRegistry.getText().isEmpty() &&
-                textFieldCel.getText().isEmpty() &&
+        return textFieldName.getText().isEmpty() ||
+               textFieldRegistry.getText().isEmpty() ||
+               (textFieldCel.getText().isEmpty() &&
                 textFieldHome.getText().isEmpty() &&
-                textFieldBusiness.getText().isEmpty() &&        
-                textAreaObs.getText().isEmpty() &&
-                textFieldId.getText().isEmpty() && 
-                formattedTextFieldZipCode.getValue() == null && 
-                formattedTextFieldBirthDate.getValue() == null &&
-                textFieldRate.getText().isEmpty());
+                textFieldBusiness.getText().isEmpty());
     }
     
     private void setupComponents() {

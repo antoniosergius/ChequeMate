@@ -44,9 +44,9 @@ public class ChequeMate {
     public static final String VERSION = "2.0"; 
     
     public static Connection init(MySQLParameters mysqlParam, char[] password) throws SQLException, IOException, InterruptedException {
-        Connection conn = testDB(mysqlParam, password);
-        verifyDataBase(conn);
-        conn = registerDB(mysqlParam, password);
+        //Connection conn = testDB(mysqlParam, password);
+        //verifyDataBase(conn);
+        Connection conn = registerDB(mysqlParam, password);
         ChequeMate.HOLIDAY_CONTROL.createInstances(conn);
         ChequeMate.backupService = new BackupService(mysqlParam, password);
         ChequeMate.parameters = new ParameterController(conn).get();
@@ -264,7 +264,7 @@ public class ChequeMate {
         backupMySQL.setDateTime(new GregorianCalendar());
         String fileName = backupMySQL.createFileName();
         File file = new File(ChequeMate.getPreferences().getBackupPath()+File.separator+fileName);
-        
+        //verificar se o ultimo arquivo é igual ao próximo
         if (file.exists()) {
             if (file.canWrite()) {
                 executeBackup(file, true, backupMySQL);

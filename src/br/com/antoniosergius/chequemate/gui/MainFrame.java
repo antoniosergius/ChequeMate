@@ -1374,6 +1374,7 @@ public class MainFrame extends javax.swing.JFrame {
 
    private void quitApp() {
       try {
+         ChequeMate.createDailyBackup();
          ChequeMate.disconnectDB(conn);
       } catch (SQLException ex) {
          LOG.log(Level.SEVERE, ex.getMessage(), ex);

@@ -85,7 +85,7 @@ public class InitScreen extends javax.swing.JFrame {
                 splash.setVisible(true);
             });
             try {
-                Thread.sleep(1800);
+                Thread.sleep(1400);
             } catch (InterruptedException ex) {
                 LOG.log(Level.SEVERE, ex.getMessage(), ex);
             } finally {

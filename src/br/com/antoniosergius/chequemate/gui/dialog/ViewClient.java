@@ -401,6 +401,11 @@ public class ViewClient extends javax.swing.JDialog {
         buttonRevert.setFocusable(false);
         buttonRevert.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonRevert.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonRevert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRevertActionPerformed(evt);
+            }
+        });
         jToolBar1.add(buttonRevert);
 
         javax.swing.GroupLayout panelMainLayout = new javax.swing.GroupLayout(panelMain);
@@ -470,15 +475,16 @@ public class ViewClient extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonApplyActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
-        if (!editing || client.equals(newOne)) {
-            cancel();
-        } else {
+        validate(false);
+        if (editing && !client.equals(newOne)) {
             int choice = JOptionPane.showConfirmDialog(this, "Realmente deseja cancelar as alterações?",
                     "Cancelar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (choice == JOptionPane.YES_OPTION) {
                 cancel();
                 revert(false);
-            }
+            } 
+        } else {
+            cancel();
         }
     }//GEN-LAST:event_buttonCancelActionPerformed
 
@@ -493,6 +499,13 @@ public class ViewClient extends javax.swing.JDialog {
     private void buttonRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRemoveActionPerformed
         delete();
     }//GEN-LAST:event_buttonRemoveActionPerformed
+
+    private void buttonRevertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRevertActionPerformed
+        validate(false);
+        if(!client.equals(newOne)) {
+            revert(true);
+        }
+    }//GEN-LAST:event_buttonRevertActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonApply;
