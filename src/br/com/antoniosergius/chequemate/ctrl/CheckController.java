@@ -26,6 +26,7 @@ public class CheckController {
       this.conn = conn;
    }
 
+   //CONFERIR METODO
    public boolean exists(Check check) throws SQLException {
       String sql = "SELECT COUNT(idCheque) FROM cheque WHERE numero = ? AND banco = ? AND agencia = ? AND cadastro like ?";
       try (PreparedStatement pst = conn.prepareStatement(sql)) {
@@ -35,7 +36,7 @@ public class CheckController {
          pst.setString(4, check.getPayee().getRegistryNumber());
          try (ResultSet result = pst.executeQuery()) {
             result.first();
-            return result.getInt(1) > 1;
+            return result.getInt(1) >= 1;
          }
       }
    }

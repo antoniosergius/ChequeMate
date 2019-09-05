@@ -686,25 +686,19 @@ public class RegisterCheckFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_tableCheckMouseReleased
 
     private void buttonPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPrintActionPerformed
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    printRecord();
-                } catch (ChequeMateException ex) {
-                    LOG.log(Level.WARNING, ex.getMessage(), ex);
-                    ex.showExceptionMessage();
-                } 
+        SwingUtilities.invokeLater(() -> {
+            try {
+                printRecord();
+            } catch (ChequeMateException ex) {
+                LOG.log(Level.WARNING, ex.getMessage(), ex);
+                ex.showExceptionMessage(); 
             }
         });
     }//GEN-LAST:event_buttonPrintActionPerformed
 
     private void buttonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExitActionPerformed
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                exitForm();
-            }
+        SwingUtilities.invokeLater(() -> {
+            exitForm();
         });
     }//GEN-LAST:event_buttonExitActionPerformed
 
@@ -728,15 +722,12 @@ public class RegisterCheckFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_textFieldRegistryNumberFocusLost
 
     private void buttonSaveRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveRecordActionPerformed
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    apply();
-                } catch (ChequeMateException ex) {
-                    LOG.log(Level.WARNING, ex.getMessage(), ex);
-                    ex.showExceptionMessage();
-                }
+        SwingUtilities.invokeLater(() -> {
+            try {
+                apply();
+            } catch (ChequeMateException ex) {
+                LOG.log(Level.WARNING, ex.getMessage(), ex);
+                ex.showExceptionMessage();
             }
         });
     }//GEN-LAST:event_buttonSaveRecordActionPerformed
@@ -754,11 +745,8 @@ public class RegisterCheckFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_tableCheckMouseClicked
 
     private void buttonNewRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNewRecordActionPerformed
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                newRecord();
-            }
+        SwingUtilities.invokeLater(() -> {
+            newRecord();
         });
     }//GEN-LAST:event_buttonNewRecordActionPerformed
 
@@ -984,6 +972,17 @@ public class RegisterCheckFrame extends javax.swing.JFrame {
             if (c.hashCode()==check.hashCode()) {
                 throw ex.retrieve("Já existe na tabela um cheque com o mesmo número, banco, agência e emitente.", textFieldNumber);
             }
+        }
+        //checar se existe um cheque com o mesmo número, banco, agência e CPF no BD
+        boolean exists = true;
+        try {
+            exists = checkControl.exists(check);
+            System.out.println("existe "+exists);
+        } catch (SQLException e) {
+            LOG.log(Level.WARNING, e.getMessage(), e);
+        }
+        if (exists){
+            throw ex.retrieve("Já existe no sistema um cheque com o mesmo número, banco, agência e emitente.", textFieldNumber);
         }
         return check;
     }
