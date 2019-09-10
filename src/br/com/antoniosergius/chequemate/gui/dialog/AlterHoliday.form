@@ -6,6 +6,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -49,7 +50,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="buttonApply" linkSize="1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="labelDetails" alignment="0" pref="393" max="32767" attributes="0"/>
+                      <Component id="labelDetails" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>

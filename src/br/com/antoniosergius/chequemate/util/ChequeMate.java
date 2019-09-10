@@ -11,6 +11,7 @@ import br.com.antoniosergius.lib.obj.Message;
 import br.com.antoniosergius.lib.util.MySQLParameters;
 import br.com.antoniosergius.chequemate.util.io.BackupService;
 import br.com.antoniosergius.lib.tools.Days;
+import br.com.antoniosergius.lib.tools.Format;
 import br.com.antoniosergius.lib.util.io.Configuration;
 import br.com.antoniosergius.lib.util.io.Serialize;
 import br.com.antoniosergius.lib.util.io.XMLStream;
@@ -26,7 +27,7 @@ import java.sql.SQLException;
 import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import com.mysql.cj.jdbc.Driver;
+import org.gjt.mm.mysql.Driver;
 import org.pushingpixels.substance.api.SubstanceLookAndFeel;
 
 public class ChequeMate {
@@ -38,7 +39,7 @@ public class ChequeMate {
     private static BackupService backupService;
     private static Preferences preferences;
     private static char[] mysqlPassword;
-    private static final HolidayController HOLIDAY_CONTROL = new HolidayController();
+    private static HolidayController HOLIDAY_CONTROL = new HolidayController();
     public static final Locale LOCALE = new Locale("pt", "BR");
     public static final XMLStream XSTREAM = new XMLStream();
     public static final String VERSION = "2.0"; 
@@ -50,6 +51,7 @@ public class ChequeMate {
         ChequeMate.HOLIDAY_CONTROL.createInstances(conn);
         ChequeMate.backupService = new BackupService(mysqlParam, password);
         ChequeMate.parameters = new ParameterController(conn).get();
+        
         ChequeMate.minInputDate = HOLIDAY_CONTROL.getMinInputDate();
         ChequeMate.minExpirationDate = HOLIDAY_CONTROL.getMinExpirationDate();
         GregorianCalendar max = new GregorianCalendar();
@@ -86,23 +88,6 @@ public class ChequeMate {
         }
     }
     
-    public static Connection testDB(MySQLParameters parameters, char[] password) throws SQLException{
-        StringBuilder url = new StringBuilder();
-        url.append("jdbc:mysql://");
-        url.append(parameters.getServer());
-        url.append(":");
-        url.append(parameters.getPort());
-        url.append("/");
-        url.append(parameters.getDatabase());
-        Properties prop = new Properties();
-        prop.put("user", parameters.getUser());
-        prop.put("password", String.valueOf(password));
-        prop.put("useTimezone", "true");
-        prop.put("serverTimezone", "UTC");
-        DriverManager.registerDriver(new Driver());
-        return DriverManager.getConnection(url.toString(), prop);
-    }
-    
     public static Connection registerDB(MySQLParameters parameters, char[] password) throws SQLException{
         StringBuilder url = new StringBuilder();
         url.append("jdbc:mysql://");
@@ -114,8 +99,6 @@ public class ChequeMate {
         Properties prop = new Properties();
         prop.put("user", parameters.getUser());
         prop.put("password", String.valueOf(password));
-        prop.put("useTimezone", "true");
-        prop.put("serverTimezone", "UTC");
         DriverManager.registerDriver(new Driver());
         return DriverManager.getConnection(url.toString(), prop);
     }
@@ -264,7 +247,6 @@ public class ChequeMate {
         backupMySQL.setDateTime(new GregorianCalendar());
         String fileName = backupMySQL.createFileName();
         File file = new File(ChequeMate.getPreferences().getBackupPath()+File.separator+fileName);
-        //verificar se o ultimo arquivo é igual ao próximo
         if (file.exists()) {
             if (file.canWrite()) {
                 executeBackup(file, true, backupMySQL);

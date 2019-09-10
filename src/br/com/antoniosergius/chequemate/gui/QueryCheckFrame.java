@@ -726,6 +726,7 @@ public class QueryCheckFrame extends javax.swing.JFrame {
     private void datePickerLowestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datePickerLowestActionPerformed
         Date date = datePickerLowest.getDate();
         if (date != null) {
+            //System.out.println("Data escolhida = "+ date.toString());
             query.setLowestExpiration(date.getTime());
             queryAndSetupTableData();
             sortByColumn(6);

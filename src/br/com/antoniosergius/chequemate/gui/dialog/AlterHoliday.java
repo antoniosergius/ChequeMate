@@ -345,7 +345,7 @@ public class AlterHoliday extends javax.swing.JDialog {
 
     private boolean validate(boolean warn) {
         try {
-            current = getHolidayFromForm();
+            newOne = getHolidayFromForm();
             if (warn) {
                 ChequeMate.showSuccessMessage(this, "Todos os valores foram validados com sucesso.");
             }
@@ -406,7 +406,11 @@ public class AlterHoliday extends javax.swing.JDialog {
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE); 
         if (choice == JOptionPane.YES_OPTION) {
             holidayControl.update(current.getId(), newOne);
+            System.out.println("feriado corrente: "+ current.toString());
+            System.out.println("feriado novo: "+ newOne.toString());
         }
         return choice;
     }
+    
+    
 }

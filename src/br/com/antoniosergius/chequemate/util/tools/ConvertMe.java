@@ -9,6 +9,7 @@ import br.com.antoniosergius.chequemate.obj.PayeeExt;
 import br.com.antoniosergius.chequemate.obj.Phone;
 import br.com.antoniosergius.lib.tools.Convert;
 import br.com.antoniosergius.lib.tools.Days;
+import br.com.antoniosergius.lib.tools.Format;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,7 +41,7 @@ public class ConvertMe {
             
             Check check = new Check(number, bank, agency, gross, net,
                     payee, expiration, inputDate, idClient);
-            
+           
             GregorianCalendar calcDate = new GregorianCalendar();
             java.sql.Date date = result.getDate("dataCalculo");
             if (date!=null) {

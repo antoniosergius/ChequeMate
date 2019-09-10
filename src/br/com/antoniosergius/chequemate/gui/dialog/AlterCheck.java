@@ -649,6 +649,8 @@ public class AlterCheck extends javax.swing.JDialog {
     }
     
     private void setupForm() {
+        formattedTextFieldInputDate.setText(Format.timestamp(check.getInputDate()));
+        datePickerExpiration.setDate(check.getExpiration().getTime());
         textFieldCalcDate.setText(Format.date(check.getCalcDate()));
         textFieldRate.setText(Format.decimal(check.getRate()));
         textFieldNet.setText(Format.decimal(check.getNet()));
