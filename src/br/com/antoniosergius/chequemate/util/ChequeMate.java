@@ -11,7 +11,6 @@ import br.com.antoniosergius.lib.obj.Message;
 import br.com.antoniosergius.lib.util.MySQLParameters;
 import br.com.antoniosergius.chequemate.util.io.BackupService;
 import br.com.antoniosergius.lib.tools.Days;
-import br.com.antoniosergius.lib.tools.Format;
 import br.com.antoniosergius.lib.util.io.Configuration;
 import br.com.antoniosergius.lib.util.io.Serialize;
 import br.com.antoniosergius.lib.util.io.XMLStream;
