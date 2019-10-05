@@ -977,7 +977,7 @@ public class RegisterCheckFrame extends javax.swing.JFrame {
         boolean exists = true;
         try {
             exists = checkControl.exists(check);
-            System.out.println("existe "+exists);
+            //System.out.println("existe "+exists);
         } catch (SQLException e) {
             LOG.log(Level.WARNING, e.getMessage(), e);
         }

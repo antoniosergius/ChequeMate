@@ -89,18 +89,16 @@ public class ChequeMate {
     }
     
     public static Connection registerDB(MySQLParameters parameters, char[] password) throws SQLException{
-        StringBuilder url = new StringBuilder();
-        url.append("jdbc:mysql://");
-        url.append(parameters.getServer());
-        url.append(":");
-        url.append(parameters.getPort());
-        url.append("/");
-        url.append(parameters.getDatabase());
+        String url = "jdbc:mysql://"+
+                parameters.getServer()+":"+
+                parameters.getPort()+"/"+
+                parameters.getDatabase();
         Properties prop = new Properties();
         prop.put("user", parameters.getUser());
         prop.put("password", String.valueOf(password));
+        prop.put("useSSL","false");
         DriverManager.registerDriver(new Driver());
-        return DriverManager.getConnection(url.toString(), prop);
+        return DriverManager.getConnection(url, prop);
     }
     
     public static void disconnectDB(Connection conn) throws SQLException {
@@ -215,7 +213,6 @@ public class ChequeMate {
         }
     }
 
-
     private static void verifyDataBase(Connection conn) throws SQLException, IOException, InterruptedException {
         try (ResultSet resultSet = conn.getMetaData().getCatalogs()) {
             boolean hasIt = false;
@@ -235,11 +232,8 @@ public class ChequeMate {
                 if (exitValue != 0) {
                     ChequeMate.showErrorMessage(null, "Erro na criação da base de dados. Contate o administrador.");
                 } 
-            }
-            
+            }   
         }
-        
-        
     }
 
     public static void createDailyBackup() {

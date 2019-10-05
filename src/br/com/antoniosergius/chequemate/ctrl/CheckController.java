@@ -64,7 +64,7 @@ public class CheckController {
             if (result.next()) {
                int idCheck = result.getInt(1);
                check.setId(idCheck);
-               System.out.println("inserted = Check.id{" + check.getId() + '}');
+               //System.out.println("inserted = Check.id{" + check.getId() + '}');
             }
          }
       }
@@ -155,13 +155,13 @@ public class CheckController {
       try (PreparedStatement pst = conn.prepareStatement("DELETE FROM cheque WHERE idCheque = ?")) {
          pst.setInt(1, idCheck);
          pst.executeUpdate();
-         System.out.println("deleted = Check.id{" + idCheck + '}');
+         //System.out.println("deleted = Check.id{" + idCheck + '}');
       }
    }
 
    public void update(Check check) throws SQLException {
       update(check.getId(), check);
-      System.out.println("updated = Check.id{" + check.getId() + '}');
+      //System.out.println("updated = Check.id{" + check.getId() + '}');
    }
 
    public void update(int id, Check check) throws SQLException {

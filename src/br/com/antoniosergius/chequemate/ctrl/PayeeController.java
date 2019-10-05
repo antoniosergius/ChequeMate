@@ -126,6 +126,7 @@ public class PayeeController {
         tmp.append("dataPrimeiro, dataUltimo, maiorValor) values");
         tmp.append("(?,?,?,?,?,?)");
         String insert = tmp.toString();
+        
         int id = -1;
         try (PreparedStatement pst = conn.prepareStatement(insert,
                 Statement.RETURN_GENERATED_KEYS)) {
@@ -140,7 +141,6 @@ public class PayeeController {
                 if (result.next()) {
                     id = result.getInt(1);
                     payee.setId(id);
-                    System.out.println("inserted = PayeeExt.name{"+payee.getName()+'}');
                 } 
             }
         }
@@ -155,7 +155,7 @@ public class PayeeController {
     
     public void update(PayeeExt payee) throws SQLException {
         update(payee.getId(), payee);
-        System.out.println("updated = PayeeExt.name{"+payee.getName()+'}');
+        //System.out.println("updated = PayeeExt.name{"+payee.getName()+'}');
     }
     
     public void update(int id, PayeeExt payee) throws SQLException {
@@ -186,7 +186,7 @@ public class PayeeController {
             pst.setDouble(3, payee.getHigherCheckValue());
             pst.setInt(4, payee.getId());
             pst.executeUpdate();
-            System.out.println("updated = Payee.name{"+payee.getName()+'}');
+            //System.out.println("updated = Payee.name{"+payee.getName()+'}');
         }
     }
     
@@ -202,8 +202,10 @@ public class PayeeController {
     
     public void decrementCounter(String registryNumber) throws SQLException {
         if (!exists(registryNumber)) {
-            throw new SQLException("Emitente não encontrado");
+            return;
+            //throw new SQLException("Emitente não encontrado");
         }
+        
         int counter = getCounter(registryNumber)-1;
         if (counter == 0) {
             delete(getId(registryNumber));
@@ -241,13 +243,20 @@ public class PayeeController {
     }
     
     public void updateFromCheckList(ArrayList<Check> checkList) throws SQLException {
-        CheckController checkControl = new CheckController(conn);
         for (Check check : checkList) {
-            if (!checkControl.exists(check)) {
-                updateFromCheck(check);
-            }
+            updateFromCheck(check);
         }    
     }
+    
+//    public void updateFromCheckList(ArrayList<Check> checkList) throws SQLException {
+//        CheckController checkControl = new CheckController(conn);
+//        for (Check check : checkList) {
+//            if (!checkControl.exists(check)) {
+//                System.out.println("não existe o cheque de "+ check.getPayee().getRegistryNumber());
+//                updateFromCheck(check);
+//            }
+//        }    
+//    }
     
     public void updateFromCheck(Check check) throws SQLException {
         String registryNumber = check.getPayee().getRegistryNumber();
@@ -271,7 +280,7 @@ public class PayeeController {
         try (PreparedStatement pst = conn.prepareStatement("DELETE FROM emitente WHERE idEmitente = ?")) {
             pst.setInt(1, id);
             pst.executeUpdate();
-            System.out.println("deleted = PayeeExt.id{"+id+'}');
+            //System.out.println("deleted = PayeeExt.id{"+id+'}');
         }
     }
 
@@ -334,26 +343,43 @@ public class PayeeController {
             }
         }
     }
-   public void insertImage(String registryNumber, File file) throws SQLException, FileNotFoundException, IOException {
-      String sql = "INSERT INTO emitente (assinatura) values (?) WHERE cadastro LIKE ?";
-      
-      try (PreparedStatement pst = conn.prepareStatement(sql)){
-         FileInputStream fis = new FileInputStream(file);
-         pst.setBinaryStream(1, fis, (int)file.length());
-         pst.setString(2, registryNumber);
-         pst.executeUpdate();
-      }
-   }
-   
-   public void insertImage(int id, File file) throws SQLException, FileNotFoundException {
-      String sql = "INSERT INTO emitente (assinatura) values (?) WHERE idEmitente = ?";
-      
-      try (PreparedStatement pst = conn.prepareStatement(sql)){
-         FileInputStream fis = new FileInputStream(file);
-         pst.setBinaryStream(1, fis, (int)file.length());
-         pst.setInt(2, id);
-         pst.executeUpdate();
-      }
-   }
+    
+    
+    //será rodado uma única vez
+    public void corrigeEmitentesRetroativos() throws SQLException{
+        String query = "SELECT * FROM cheque WHERE DATE(dataEntrada) between '2019-09-11' and DATE(NOW())";
+        try (Statement state = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, 
+             ResultSet.CONCUR_READ_ONLY, ResultSet.CLOSE_CURSORS_AT_COMMIT);
+             ResultSet result = state.executeQuery(query)){
+            
+            boolean hasNext = result.next();
+            if (hasNext) {
+                updateFromCheckList(ConvertMe.toCheckList(result));
+            }
+        }
+    }
+    
+    
+//   public void insertImage(String registryNumber, File file) throws SQLException, FileNotFoundException, IOException {
+//      String sql = "INSERT INTO emitente (assinatura) values (?) WHERE cadastro LIKE ?";
+//      
+//      try (PreparedStatement pst = conn.prepareStatement(sql)){
+//         FileInputStream fis = new FileInputStream(file);
+//         pst.setBinaryStream(1, fis, (int)file.length());
+//         pst.setString(2, registryNumber);
+//         pst.executeUpdate();
+//      }
+//   }
+//   
+//   public void insertImage(int id, File file) throws SQLException, FileNotFoundException {
+//      String sql = "INSERT INTO emitente (assinatura) values (?) WHERE idEmitente = ?";
+//      
+//      try (PreparedStatement pst = conn.prepareStatement(sql)){
+//         FileInputStream fis = new FileInputStream(file);
+//         pst.setBinaryStream(1, fis, (int)file.length());
+//         pst.setInt(2, id);
+//         pst.executeUpdate();
+//      }
+//   }
     
 }
