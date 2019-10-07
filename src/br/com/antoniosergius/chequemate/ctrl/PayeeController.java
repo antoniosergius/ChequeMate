@@ -347,14 +347,14 @@ public class PayeeController {
     
     //será rodado uma única vez
     public void corrigeEmitentesRetroativos() throws SQLException{
-        String query = "SELECT * FROM cheque WHERE DATE(dataEntrada) between '2019-09-11' and DATE(NOW())";
+        String query = "SELECT * FROM cheque WHERE DATE(dataEntrada) between '2019-09-09' and DATE(NOW())";
         try (Statement state = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, 
              ResultSet.CONCUR_READ_ONLY, ResultSet.CLOSE_CURSORS_AT_COMMIT);
              ResultSet result = state.executeQuery(query)){
             
             boolean hasNext = result.next();
             if (hasNext) {
-                updateFromCheckList(ConvertMe.toCheckList(result));
+                updateFromCheckList(ConvertMe.toCheckListTemp(result));
             }
         }
     }

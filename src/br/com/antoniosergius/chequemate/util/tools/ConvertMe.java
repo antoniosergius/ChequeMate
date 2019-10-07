@@ -58,7 +58,42 @@ public class ConvertMe {
         return checkList;
     }
     
-    
+    public static ArrayList<Check> toCheckListTemp(ResultSet result) throws SQLException {
+        ArrayList<Check> checkList = new ArrayList<>();
+        do {
+            int number = result.getInt("numero");
+            int bank = result.getInt("banco");
+            int id = result.getInt("idCheque");
+            int agency = result.getInt("agencia");
+            double gross = result.getDouble("valor");
+            double net = result.getDouble("valorLiquido");
+            Payee payee = new Payee(result.getString("emitente").toUpperCase(),
+                    result.getString("cadastro"));
+            GregorianCalendar expiration = new GregorianCalendar();
+            expiration.setTime(result.getDate("dataBoa"));
+            GregorianCalendar inputDate = new GregorianCalendar();
+            inputDate.setTime(result.getTimestamp("dataEntrada"));
+            int idClient = result.getInt("fkCliente");
+            double rate = result.getDouble("taxa");
+            String obs = result.getString("obs");
+            
+            Check check = new Check(number, bank, agency, gross, net,
+                    payee, expiration, inputDate, idClient);
+           
+            GregorianCalendar calcDate = new GregorianCalendar();
+            java.sql.Date date = result.getDate("dataCalculo");
+            if (date!=null) {
+                calcDate.setTime(date);
+                check.setCalcDate(calcDate);
+            }
+            check.setRate(rate);
+            check.setId(id);
+            check.setObs(obs);
+            
+            checkList.add(check);
+        } while (result.next());
+        return checkList;
+    }
     
     public static String nullToString(String str) {
         return str == null ? "" : str.trim();
