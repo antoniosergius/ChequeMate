@@ -41,7 +41,7 @@ public class ChequeMate {
     private static HolidayController HOLIDAY_CONTROL = new HolidayController();
     public static final Locale LOCALE = new Locale("pt", "BR");
     public static final XMLStream XSTREAM = new XMLStream();
-    public static final String VERSION = "2.0"; 
+    public static final String VERSION = "2.2.1"; 
     
     public static Connection init(MySQLParameters mysqlParam, char[] password) throws SQLException, IOException, InterruptedException {
         //Connection conn = testDB(mysqlParam, password);
